@@ -1033,6 +1033,16 @@ sub _copyResource {
             $path =~ s(\/[^\/]*$)()o;    # path, excluding the basename
         }
 
+        # Block access if file is not in system and user has no view access to topic.
+        # If topic does not exist, block as well; this filters things like 'Main/../Main/MySecret/Secret.png'.
+        my ( $fweb, $ftopic ) = Foswiki::Func::normalizeWebTopicName( undef, $path );
+        my $wikiname = Foswiki::Func::getWikiName();
+        if ( $fweb !~ m/^System/ and ( not Foswiki::Func::topicExists( $fweb, $ftopic ) or not Foswiki::Func::checkAccessPermission( 'VIEW', $wikiname,  undef, $ftopic, $fweb ) ) ) {
+            $file = 'err.png';
+            $path = $Foswiki::cfg{SystemWebName}.'/MAPrinceModPlugin';
+            $bareRsrcName = "$path/$file";
+        }
+
         # Copy resource to rsrc directory.
         my $pubDir = Foswiki::Func::getPubDir();
         my $src    = "$pubDir/$bareRsrcName";
