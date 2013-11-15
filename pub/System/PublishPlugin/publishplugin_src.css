@@ -1,0 +1,34 @@
+.foswikiPageForm table th, .foswikiPageForm table td {
+  vertical-align:top;
+  border-bottom:1px solid #ddd;
+  padding:.5em;
+}
+table.publishForm {
+  width:100%;
+}
+table.publishForm th {
+  background:#2989bb;
+  color:#fff;
+}
+table.publishForm th, table.publishForm td {
+  padding:0.4em 1em;
+  text-align:left;
+}
+table.publishForm th {
+  border-color:#2989bb;
+}
+table.publishForm td {
+  border-color:#dfdfdf;
+}
+table.publishForm .nameCol {
+  background:#f1f1f1;
+}
+table.publishForm .inputCol {
+  background:#f7f9f0;
+}
+table.publishForm .infoCol {
+  background:#f1f1f1;
+}
+table.publishForm .paramCol {
+  background:#f7f9f0;
+}
