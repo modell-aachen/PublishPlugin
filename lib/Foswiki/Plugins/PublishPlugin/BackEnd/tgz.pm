@@ -48,6 +48,12 @@ sub param_schema {
             validator =>
               \&Foswiki::Plugins::PublishPlugin::Publisher::validateFilename
         },
+        outwebtopic => {
+            default => ''
+        },
+        outattachment => {
+            default => ''
+        },
         %{ $class->SUPER::param_schema() }
     };
 }
@@ -83,6 +89,26 @@ sub close {
     unless ( $this->{tar}->write( "$this->{path}$landed", 1 ) ) {
         $this->{logger}->logError( $this->{tar}->error() );
     }
+    # attach result
+    if ( $this->{params}->{outwebtopic} && $this->{params}->{outattachment} ) {
+        my $attachment = "$this->{path}$landed";
+        my ( $outweb, $outtopic ) = Foswiki::Func::normalizeWebTopicName( undef, $this->{params}->{outwebtopic} );
+        my $size = -s $attachment;
+        try {
+            if ( !Foswiki::Func::topicExists( $outweb, $outtopic) ) {
+                my $meta = undef; # TODO
+                Foswiki::Func::saveTopic( $outweb, $outtopic, $meta, '%MAKETEXT{"TGZ Export"}%' );
+            }
+            my $outattachment = $this->{params}->{outattachment};
+            Foswiki::Func::saveAttachment( $outweb, $outtopic, $outattachment, { file => $attachment, filesize => $size } );
+            $this->{logger}->logInfo( "Attached tgz to", "<a href='$Foswiki::cfg{PubUrlPath}/$outweb/$outtopic/$outattachment'>$outattachment</a>" );
+        } otherwise {
+            my $e = shift;
+            Foswiki::Func::writeWarning( $e );
+            $this->{logger}->logError( $e );
+        };
+    }
+
     return $landed;
 }
 

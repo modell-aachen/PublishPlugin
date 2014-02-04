@@ -293,7 +293,7 @@ ISBN=1-56592-149-6
   </tr>
   <tr class="publishOptionsSet">
     <td colspan="4">
-       When exporting to PDF the result will be attached to a topic.
+       %MAKETEXT{"When exporting to PDF or TGZ the result will be attached to a topic."}%
     </td>
   </tr>
   <tr class="expert" class="publishOptionsSet">
