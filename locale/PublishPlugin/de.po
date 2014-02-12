@@ -1,0 +1,615 @@
+# Foswiki translation for Deutsch
+# Translators:
+# Foswiki:Main/AndreUlrich, 2006,2007,2008
+# Foswiki:Main/OliverKrueger, 2006
+msgid ""
+msgstr ""
+"Project-Id-Version: Foswiki $Id\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2013-10-25 14:56+0200\n"
+"Last-Translator: Michael <daum@michaeldaumconsulting.com>\n"
+"Language-Team: Foswiki German Translation Team <none>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.1.6\n"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:111
+msgid ""
+"A %1 that will cause a topic to be excluded if the RE matches the topic "
+"content."
+msgstr ""
+"Ein %1, welcher eine Seite ausschließt, wenn der reguläre Ausdruck auf den "
+"Seiteninhalt zutrifft."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:49
+msgid ""
+"A non-blank =topiclist= is still subject to filtering against =inclusions= "
+"and =exclusions=."
+msgstr ""
+"Eine nicht-leere =topiclist= wird weiterhin durch =inclusions= und "
+"=exclusions= gefiltert."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:59
+msgid "Advanced topic selection..."
+msgstr "Erweiterte Seitenauswahl..."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:272
+msgid "Attach output options"
+msgstr "Einstellungen zum Anhängen der Ausgabe"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:188
+msgid ""
+"By default the plugin uses the default =view= templates when it renders "
+"topics for publishing. You can change this to a list of one or more "
+"templates that you want to render using."
+msgstr ""
+"In den Standardeinstellungen benutzt das Plugin das normale =view= template, "
+"wenn es die Seiten zur darstellung ausgibt. Sie können das durch eine Liste "
+"von einem oder mehreren templates zur Darstellung ersetzen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:18
+msgid "Choose what to publish"
+msgstr "Wählen Sie, was publiziert werden soll"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:81
+msgid ""
+"Comma-separated list of %1 that match the names of topics to exclude. This "
+"acts as a filter on the topic list. Leave blank to include all topics in the "
+"topic list."
+msgstr ""
+"Komma-separierte Liste von %1, welche die Namen der auzuschließenden Seiten "
+"treffen muss. Diese arbeiten als Filter für die Liste der Seiten. Lassen Sie "
+"dieses Feld leer, um alle Seiten einzuschließen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:69
+msgid ""
+"Comma-separated list of %1 that match the names of topics to include. This "
+"acts as a filter on the topic list. Use =*= to publish all topics in the "
+"list."
+msgstr ""
+"Komma-separierte Liste von %1, welche die Namen der einzuschließenden Seiten "
+"treffen muss. Diese arbeiten als Filter für die Liste der Seiten. Nutzen Sie "
+"=*=, um alle Seiten in der Liste zu publizieren."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:172
+msgid "Comma-separated list of Plugins to enable during publishing."
+msgstr ""
+"Komma-separierte Liste mit Plugins, welche beim Publizieren aktiviert sein "
+"sollen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:186
+msgid "Comma-separated list of template names."
+msgstr "Komma-separierte Liste mit template Namen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:44
+msgid ""
+"Comma-separated list of topic names. Leave blank to publish all topics in "
+"the web (as filtered by =inclusions= and =exclusions=)."
+msgstr ""
+"Komma-separierte Liste mit Seitennamen. Lassen Sie diese Option leer, um "
+"alle Seiten in dem Bereich zu publizieren (gefiltert durch =includions= und "
+"=exclusions=)."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:245
+msgid "Consecutive"
+msgstr "Fortlaufend"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:198
+msgid "Copy External Resources"
+msgstr "Externe Quellen kopieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:203
+msgid ""
+"Copy externally referenced resources (e.g. images on other servers).  This "
+"option enables the copying of resources hosted on external servers into the "
+"published content. If it is disabled, the plugin will maintain an internet "
+"link to the external content. Enable this option if you want the pubished "
+"content to be totally self-contained (for example, for offline reading) or "
+"disable it for faster publishing process and smaller output."
+msgstr ""
+"Extern referenzierte Quellen kopieren (z.B. Bilder auf anderen Servern). "
+"Diese Option ermöglicht es extern liegende Quellen in den publizierten "
+"Inhalt zu kopieren. Wenn diese Option deaktiviert ist werden Links auf "
+"Quellen im Internet zeigen. Aktivieren Sie diese Option, wenn Sie eine "
+"eigenständig abgeschlossene Publikation (z.B. zur offline Betrachtung) "
+"brauchen oder deaktivieren Sie die Option aus, um das Publizieren zu "
+"beschleunigen und eine kleinere Ausgabe zu erzeugen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:341
+msgid "Default page (topic)"
+msgstr "Standard Seite"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:127
+msgid ""
+"Default processing of topics for publishing tries to render the topics as "
+"closely to the way they are viewed in the wiki as possible. These options "
+"provide a finer level of control."
+msgstr ""
+"Standard Verarbeitung von Seiten zum Publizieren; es wird versucht die Seite "
+"so nah wie möglich am Erscheinungsbild im Wiki darzustellen. Diese Optionen "
+"bieten feinere Kontrollmöglichkeiten."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:319
+msgid "Defaults to the name of the generator"
+msgstr "Standardwert ist der Name des Generators"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:373
+msgid "Directory relative to the root of your site"
+msgstr "Verzeichnis relativ zur Wurzel der Seite"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:166
+msgid "Enable plugins (plugin names)"
+msgstr "Plugins aktivieren (Plugin namen)"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:75
+msgid "Exclude filter"
+msgstr "Ausschluss filter"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:354
+msgid "Extended directory path"
+msgstr "Erweiterter Verzeichnis-Pfad"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:500
+msgid "Extras"
+msgstr "Extras"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:402
+msgid "FTP output options"
+msgstr "FTP Ausgabe Optionen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:406
+msgid "FTP output options are only relevant if the output format is =ftp=."
+msgstr ""
+"FTP Ausgabe Optionen sind nur relevant, wenn als Ausgabeformat =ftp= gewählt "
+"ist."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:459
+msgid "FTP server password."
+msgstr "FTP server Passwort."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:445
+msgid "FTP server user name."
+msgstr "FTP server user Name."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:467
+msgid "Fast publish"
+msgstr ""
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:305
+msgid "File output options"
+msgstr "Datei Ausgabe Optionen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:309
+msgid ""
+"File output options are relevant when output is being written to local files "
+"on disc."
+msgstr ""
+"Datei Ausgabe Optionen sind relevant, wenn Ausgabe auf das lokale "
+"Dateisystem geschrieben werden."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:105
+msgid "Filter topic contents"
+msgstr "Filter nach Seiteninhalten"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:190
+msgid ""
+"For example, you might want to use =viewpdf= to render a PDF version of the "
+"topic (if you have this action available). See %1 for a list of the template "
+"files available by default."
+msgstr ""
+"Beispielsweise möchten Sie vielleicht =viewpdf= nutzen um eine PDF Version "
+"zu generieren (falls diese Aktion verfügbar ist). Siehe %1 für eine Liste "
+"von templates, welche standardmäßig zur Verfügung stehen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:169
+msgid "Hide currently enabled plugins"
+msgstr "Momentan aktivierte Plugins ausblenden"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:97
+msgid ""
+"If a topic does not appear in the table, the most recent version will be "
+"published."
+msgstr ""
+"Wenn eine Seite nicht in der Tabelle vorkommt, wird die neueste Version "
+"publiziert."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:174
+msgid ""
+"If you leave this field blank then all plugins enabled in the wiki will be "
+"run when generating the published output. You are recommended to disable any "
+"plugins that generate interactive buttons in the output."
+msgstr ""
+"Wenn sie dieses Feld leer lassen, werden alle im Wiki aktivierten Plugins "
+"beim Erzeugen verwendet. Sie sollten Plugins, welche interaktive "
+"Schaltflächen erstellen, ausschalten."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:63
+msgid "Include filter"
+msgstr "Einschließende Filter"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:331
+msgid "Leave blank if you don't need one"
+msgstr "Leer lassen, wenn nicht benötigt"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:169
+msgid "Leave blank to enable all plugins"
+msgstr "Leer lassen um alle Plugins zu aktivieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:108
+msgid "Leave blank to include all topics"
+msgstr "Leer lassen um alle Seiten einzuschließen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:78
+msgid "Leave blank to include all topics in the topic list"
+msgstr "Leer lassen um alle Seiten aus der Seitenliste einzuschließen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:40
+msgid "Leave blank to publish all topics in the web"
+msgstr "Leer lassen um alle Seiten aus dem Bereich zu publizieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:92
+msgid "Leave blank to publish the most recent version of each topic"
+msgstr "Leer lassen um die neueste Version von jeder Seite zu publizieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:154
+msgid ""
+"Lets you define Foswiki %1 that will be available for use in topics during "
+"this publishing run. Define preferences one per line, using the syntax "
+"=PREFERENCE=VALUE= - for example,"
+msgstr ""
+"Hier können Sie %1 treffen, welche beim Publizieren genutzt werden. "
+"Definieren Sie eine Einstellung pro Zeile mit der Syntax =EINSTELLUNG=WERT= "
+"- zum Beispiel:"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:95
+msgid ""
+"Name of a topic in each published web that contains a table, each row of "
+"which maps topic names to the version of that topic to publish."
+msgstr ""
+"Name einer Seite in jedem zu publizierendem Bereich, welche eine Tabelle "
+"enthält, von welcher jede Zeile einen Seitennamen mit der zu publizierenden "
+"Version verknüpft."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:282
+msgid "Name of the attachment"
+msgstr "Name des Anhangs"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:346
+msgid "Name of topic to used to generate default.htm, index.html"
+msgstr ""
+"Name der Seite, welche benutzt werden soll um default.hml und index.hmtl zu "
+"generieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:51
+msgid ""
+"Note that this list can include topics in other webs, by referring to them "
+"using the =Web.TopicName= syntax."
+msgstr ""
+"Beachten Sie, dass diese Liste Seiten aus anderen Bereichen beinhalten kann, "
+"indem sie das =Bereich.Seitename= Format verwendet."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:486
+msgid "Other output generator options"
+msgstr "Andere Ausgabe-Generator Optionen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:280
+msgid "Output attachment"
+msgstr "Ausgabe Anhang"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:215
+msgid "Output options"
+msgstr "Ausgabe Optionen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:292
+msgid "Output topic"
+msgstr "Ausgabe Seite"
+
+#: lib/Foswiki/Plugins/PublishPlugin/BackEnd/pdf.pm:101
+msgid "PDF Export"
+msgstr "PDF Export"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:242
+msgid "Page numbering"
+msgstr "Seitenzählung"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:453
+msgid "Password"
+msgstr "Passwort"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:360
+msgid ""
+"Path of a directory relative to %1 where you want the output generated. '/' "
+"means generate the output directly in %2. This allows you to keep different "
+"publishings of the same content separated."
+msgstr ""
+"Pfad zu einem Verzeichnis relativ zu %1 wo die Ausgabe generiert werden "
+"soll. '/' bedeutet dass die Ausgabe direkt in %2 generiert werden soll. Dies "
+"ermöglicht es verschiedene Publizierungen des selben Inahlts voneinander "
+"getrennt zu halten."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:433
+msgid "Path to upload to on the FTP server."
+msgstr "Verzeichnis zum Hochladen auf dem FTP server."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:519
+msgid "Publish"
+msgstr "Publizieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:135
+msgid "Publish skin"
+msgstr "Skin zum Publizieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:259
+msgid "Publishing history topic"
+msgstr "Seite zur Publizierungs-Historie"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:384
+msgid "Relative URL"
+msgstr "Relative URL"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:370
+msgid "Resource Directory"
+msgstr "Quellen Verzeichnis"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:245
+msgid "Restart numbering for each topic"
+msgstr "Auf jeder Wiki-Seite Nummerierung neu starten"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:192
+#: data/System/PublishPluginModacDialogViewTemplate.txt:362
+msgid "See %1 for a complete description of where the output is generated."
+msgstr "Siehe %1 für eine komplette Beschreibung, wo die Ausgabe erzeugt wird."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:219
+msgid "See %1 for details of where output is created on the server."
+msgstr "Siehe %1 für Details, wo die Ausgabe auf dem server erzeugt wird."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:415
+msgid "Server address"
+msgstr "Server Adresse"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:421
+msgid "Set to blank to proof the output prior to uploading to your site."
+msgstr "Leer lassen wenn Sie die Ausgabe vor dem Upload prüfen wollen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:411
+msgid "Show FTP options..."
+msgstr "FTP Optionen zeigen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:496
+msgid "Show extra options..."
+msgstr "Extra Optionen zeigen..."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:314
+msgid "Show file output options..."
+msgstr "Dateiausgabe Optionen zeigen..."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:132
+msgid "Show processing options..."
+msgstr "Verarbeitungs Optionen zeigen..."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:140
+#: data/System/PublishPluginModacDialogViewTemplate.txt:190
+msgid "Skins"
+msgstr "Skins"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:491
+msgid "Some output generators (e.g. pdf) support extra options."
+msgstr "Einge Ausgabe Generatoren (z.B. pdf) unterstüzen extra Optionen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:506
+msgid ""
+"Some output generators support extra options (e.g. for =pdf=, you can add "
+"=htmldoc= command-line parameters here, such as =--linkstyle underline=). "
+"These options are passed directly to the output generator."
+msgstr ""
+"Einige Ausgabe Generatoren unterstützen extra Optionen (z.B. für =pdf= "
+"können Sie hier für =htmldoc= Kommandozeilen parameter angeben, wie z.B. =--"
+"linkstyle underline=). Diese Optionen werden direkt an den Ausgabegenerator "
+"weitergegeben."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:285
+msgid "Specify the name of for the attachment."
+msgstr "Geben Sie den Namen des Anhangs an."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:322
+msgid "Specify the root of the target output file name."
+msgstr "Geben Sie den Dateinamen der Ausgabedatei an (ohne Dateiendung)."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:297
+msgid "Specify the topic where the output will be attached."
+msgstr "Geben Sie den Seitennamen an, an den die Ausgabe angehangen wird."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:473
+msgid ""
+"Speed up the ftp publishing by only uploading modified files. This will "
+"store a (tiny) checksum (.md5) file on the server alongside each uploaded "
+"file which will be used to optimise future uploads. Recommended."
+msgstr ""
+"Beschleunigen Sie die Publizierung per FTP, indem Sie nur veränderte Dateien "
+"hochladen. Hierdurch wird eine (winzige) Prüfsumme (.md5) zu jeder "
+"hochgeladenen Datei auf dem Server gespeichert, welche zur Optimierung "
+"zukünftiger Uploads verwendet wird. Empfohlen."
+
+#: lib/Foswiki/Plugins/PublishPlugin/BackEnd/tgz.pm:100
+msgid "TGZ Export"
+msgstr "TGZ Export"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:142
+msgid ""
+"The =view= %1 is used to generate published pages, so %2 is the template "
+"that will be used to generate the output. You can preview any topic in this "
+"skin simply by appending %3 to the end of the view URL. Note that the "
+"standard =VIEW_TEMPLATE= template override still works when publishing."
+msgstr ""
+"Das =view= %1 wird genutzt, um publizierte Seiten zu erzeugen, also ist %2 "
+"das template welches genutzt wird um die Ausgabe zu erzeugen. Sie können für "
+"jede Seite eine Vorschau generieren, indem Sie %3 an das Ende einer URL "
+"anhängen. Beachten Sie, dass das Überschreiben mit =VIEW_TEMPLATE= auch beim "
+"Publizieren funktioniert."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:29
+msgid ""
+"The Web to publish. This is required to provide a context for the publishing "
+"process (e.g. web preference settings), even if all topics in the "
+"=topiclist= have explicit web names."
+msgstr ""
+"Der zu publizierende Bereich. Wird benötigt, um einen Kontext für den "
+"Publizierungsprozess (z.B. WebPreferences Einstellungen) herzustellen, "
+"selbst wenn alle Seiten in der =topiclist= explizite Bereichsnamen angegeben "
+"haben."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:231
+#: data/System/PublishPluginModacDialogViewTemplate.txt:249
+msgid "The available formats are:"
+msgstr "Die verfügbaren Formate sind:"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:390
+msgid ""
+"The base URL that your published Foswiki topics will reside at, for instance "
+"to create different publishing instances like =dev=, =test= and =public=. "
+"Use =/= if you will publish to the root of your site. See also %1."
+msgstr ""
+"Die base URL zu der sich die publizierten Seiten beziehen, beispielsweise um "
+"verschiedene Publizierungen, wie =dev=, =test= und =public=. Nutzen Sie =/= "
+"wenn Sie die Wurzel der Seite verwenden wollen. Siehe auch %1."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:140
+msgid ""
+"The skin provides the template for how topics are published. See %1 for more "
+"informations on skins."
+msgstr ""
+"Der skin liefert die templates um Seiten zu publizieren. Siehe %1 für "
+"weitere Informationen zu skins."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:96
+msgid "The table can be generated by a %1 or other macro. For example: %2."
+msgstr ""
+"Die Tabelle kann durch eine %1 oder andere Makros generiert werden, z.B. %2."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:264
+msgid ""
+"This is where the history of your publishing is stored. Each time you "
+"publish, this topic is re-written with the log of the publishing process. "
+"You have to have \"change\" access to this topic. You can specify a topic in "
+"another web using the standard Web.Topic syntax."
+msgstr ""
+"Hier wird die Historie der Publizierungen gespeichert. Bei jeder "
+"Publizierung wird diese Seite mit neuen Log-Daten geschrieben. Sie brauchen "
+"\"change\" Zugriff auf diese Seite. Sie können eine Seite in einem anderen "
+"Bereich mittels der normalen Bereich.Seite Schreibweise angeben."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:37
+msgid "Topic List"
+msgstr "Seiten Liste"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:245
+msgid "Treat printout as one big topic"
+msgstr "Ausgabe als eine große Wiki-Seite behandeln"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:19
+msgid "URL Parameter"
+msgstr "URL Parameter"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:66
+msgid "Use * to publish all topics in the topic list"
+msgstr "Nutzen Sie * um alle Seiten aus der Seiten Liste zu publizieren"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:137
+msgid "Use basic_publish unless you have your own customised publishing skin"
+msgstr ""
+"Nutzen Sie basic_publish, außer wenn Sie einen angepassten publizierungs "
+"skin haben."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:183
+msgid "Use view unless you need a special template"
+msgstr "Nutzen Sie view, außer wenn Sie ein spezielles template brauchen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:89
+msgid "Versions"
+msgstr "Versionen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:169
+msgid "View currently enabled plugins"
+msgstr "Momentan aktivierte Plugins anzeigen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:23
+msgid "Web"
+msgstr "Bereich"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:276
+msgid "When exporting to PDF or TGZ the result will be attached to a topic."
+msgstr "Beim Export nach PDF or TGZ wird das Resultat an eine Seite angehangen."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:376
+msgid ""
+"When publishing to HTML, attachments, icons, etc, are output to this "
+"directory. The directory name is relative to the root of your published site."
+msgstr ""
+"Beim Publizieren werden HTML, Anhänge, Icons, etc. in dieses Verzeichnis "
+"abgelegt. Der Verzeichnisname ist relativ zur Wurzel ihrer publizierten "
+"Seite."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:294
+msgid "Where to put the attachment"
+msgstr "Wohin der Anhang geheftet werden soll"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:141
+msgid ""
+"You are recommended to pick =basic_publish=, or =plain=, or a =print= skin. "
+"Your installation may also offer a special =export= or =publish= skin."
+msgstr ""
+"Es wird empfohlen =basic_publish= oder =plain= oder eine =print= skin zu "
+"verwenden. Ihre Installation bietet vielleicht einen speziellen =export= "
+"oder =publish= skin."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:47
+msgid ""
+"You can also use the %1 (see %2, below) to build such lists, and include "
+"them using the %3 macro."
+msgstr ""
+"Sie können außerdem %1 (siehe %2, unten) benutzen um solche Listen zu "
+"generieren und sie mittels %3 einbinden."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:45
+msgid ""
+"You can use Foswiki macros (such as %SEARCH...) in this list - for example, "
+"to include the contents of a topic that contains a list of topic names in a "
+"bulleted list, use %1."
+msgstr ""
+"Sie können Foswiki Makros (wie %SEARCH...) in dieser Liste verwenden - "
+"beispielsweise um den Inhalt einer Seite mit einer Liste von Seitennamen in "
+"einer Aufzählung einzubinden, nutzen Sie %1."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:154
+msgid "preferences"
+msgstr "Einstellungen"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:111
+msgid "regular expression"
+msgstr "regulärer Ausdruck"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:158
+msgid "spaces after the = sign are taken as part of the preference value."
+msgstr "Leerzeichen hinter dem = Zeichen werden als Teil des Wertes genutzt."
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:192
+#: data/System/PublishPluginModacDialogViewTemplate.txt:219
+#: data/System/PublishPluginModacDialogViewTemplate.txt:362
+msgid "where to find the output"
+msgstr "wo die Ausgabe gefunden werden kann"
+
+#: data/System/PublishPluginModacDialogViewTemplate.txt:69
+#: data/System/PublishPluginModacDialogViewTemplate.txt:81
+msgid "wildcard patterns"
+msgstr "wildcard patterns"
+
+msgid "Processing options"
+msgstr "Verarbeitungsoptionen"
+
+msgid "Preferences defined this way can be used in topics (including the history topic) like any other Foswiki preference."
+msgstr "Auf diese Weise gesetzte Einstellungen können in den Artikeln (auch in der Publizierungs-Historie) genutzt werden, wie alle anderen Foswiki-Einstellungen auch."
