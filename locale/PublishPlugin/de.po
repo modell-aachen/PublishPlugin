@@ -27,11 +27,11 @@ msgstr ""
 
 #: data/System/PublishPluginModacDialogViewTemplate.txt:49
 msgid ""
-"A non-blank =topiclist= is still subject to filtering against =inclusions= "
-"and =exclusions=."
+"A non-blank =Topic List= is still subject to filtering against =Include filter= "
+"and =Exclude filter=."
 msgstr ""
-"Eine nicht-leere =topiclist= wird weiterhin durch =inclusions= und "
-"=exclusions= gefiltert."
+"Eine nicht-leere =Seiten Liste= wird weiterhin durch =Einschließende Filter= und "
+"=Ausschluss Filter= gefiltert."
 
 #: data/System/PublishPluginModacDialogViewTemplate.txt:59
 msgid "Advanced topic selection..."
@@ -88,11 +88,11 @@ msgstr "Komma-separierte Liste mit template Namen."
 #: data/System/PublishPluginModacDialogViewTemplate.txt:44
 msgid ""
 "Comma-separated list of topic names. Leave blank to publish all topics in "
-"the web (as filtered by =inclusions= and =exclusions=)."
+"the web (as filtered by =Include filter= and =Exclude filter=)."
 msgstr ""
 "Komma-separierte Liste mit Seitennamen. Lassen Sie diese Option leer, um "
-"alle Seiten in dem Bereich zu publizieren (gefiltert durch =includions= und "
-"=exclusions=)."
+"alle Seiten in dem Bereich zu publizieren (gefiltert durch =Einschließende Filter= und "
+"=Ausschluss Filter=)."
 
 #: data/System/PublishPluginModacDialogViewTemplate.txt:245
 msgid "Consecutive"
@@ -456,11 +456,11 @@ msgstr ""
 msgid ""
 "The Web to publish. This is required to provide a context for the publishing "
 "process (e.g. web preference settings), even if all topics in the "
-"=topiclist= have explicit web names."
+"=Topic List= have explicit web names."
 msgstr ""
 "Der zu publizierende Bereich. Wird benötigt, um einen Kontext für den "
 "Publizierungsprozess (z.B. WebPreferences Einstellungen) herzustellen, "
-"selbst wenn alle Seiten in der =topiclist= explizite Bereichsnamen angegeben "
+"selbst wenn alle Seiten in der =Seiten Liste= explizite Bereichsnamen angegeben "
 "haben."
 
 #: data/System/PublishPluginModacDialogViewTemplate.txt:231
@@ -510,10 +510,6 @@ msgstr "Seiten Liste"
 #: data/System/PublishPluginModacDialogViewTemplate.txt:245
 msgid "Treat printout as one big topic"
 msgstr "Ausgabe als eine große Wiki-Seite behandeln"
-
-#: data/System/PublishPluginModacDialogViewTemplate.txt:19
-msgid "URL Parameter"
-msgstr "URL Parameter"
 
 #: data/System/PublishPluginModacDialogViewTemplate.txt:66
 msgid "Use * to publish all topics in the topic list"
