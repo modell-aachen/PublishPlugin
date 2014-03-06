@@ -25,7 +25,10 @@
       <select name="web" class="foswikiSelect">%WEBLIST{"<option $marker value='$name'>$name</option>" selection="%TMPL:P{printweb}%"}%</select>
     </td>
     <td class="infoCol">
-      %MAKETEXT{"The Web to publish. This is required to provide a context for the publishing process (e.g. web preference settings), even if all topics in the =Topic List= have explicit web names."}%
+      %MAKETEXT{"The Web to publish."}%
+      %TWISTY{mode="div" showlink="%MAKETEXT{"Advanced informations..."}%"}%
+        %MAKETEXT{"This is required to provide a context for the publishing process (e.g. web preference settings), even if all topics in the =Topic List= have explicit web names."}%
+      %ENDTWISTY%
     </td>
   </tr>
   <tr>
@@ -37,14 +40,16 @@
 
     </td>
     <td class="infoCol">
-      %MAKETEXT{"Comma-separated list of topic names. Leave blank to publish all topics in the web (as filtered by =Include filter= and =Exclude filter=)."}% %BR%
-      %MAKETEXT{"You can use Foswiki macros (such as %SEARCH...) in this list - for example, to include the contents of a topic that contains a list of topic names in a bulleted list, use [_1]." args="=%<nop>SEARCH{\"^   \*\" type=\"regex\" nonoise=\"on\" topic=\"TheTopic\" format=\"$pattern(.*?^\s*\*\s*(.*?)$.$)\"}<nop>%="}%
+      %MAKETEXT{"Comma-separated list of topic names. Leave blank to publish all topics in the web (as filtered by =Include filter= and =Exclude filter=)."}%
+      %TWISTY{mode="div" showlink="%MAKETEXT{"Advanced informations..."}%"}%
+        %MAKETEXT{"You can use Foswiki macros (such as %SEARCH...) in this list - for example, to include the contents of a topic that contains a list of topic names in a bulleted list, use [_1]." args="=%<nop>SEARCH{\"^   \*\" type=\"regex\" nonoise=\"on\" topic=\"TheTopic\" format=\"$pattern(.*?^\s*\*\s*(.*?)$.$)\"}<nop>%="}%
 
         %MAKETEXT{"You can also use the [_1] (see [_2], below) to build such lists, and include them using the [_3] macro." args="[[#BookMaker][Bookmaker]], [[#Using_Bookmaker][Using Bookmaker]], =%<nop>BOOKLIST{\"Bookweb.BookName\"}<nop>%="}%
 
         %MAKETEXT{"A non-blank =Topic List= is still subject to filtering against =Include filter= and =Exclude filter=."}%
 
         %MAKETEXT{"Note that this list can include topics in other webs, by referring to them using the =Web.TopicName= syntax."}%
+      %ENDTWISTY%
     </td>
   </tr>
   <tr>

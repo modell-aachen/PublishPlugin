@@ -453,12 +453,15 @@ msgstr ""
 "Publizieren funktioniert."
 
 #: data/System/PublishPluginModacDialogViewTemplate.txt:29
+msgid "The Web to publish."
+msgstr "Der zu publizierende Bereich."
+
 msgid ""
-"The Web to publish. This is required to provide a context for the publishing "
+"This is required to provide a context for the publishing "
 "process (e.g. web preference settings), even if all topics in the "
 "=Topic List= have explicit web names."
 msgstr ""
-"Der zu publizierende Bereich. Wird benötigt, um einen Kontext für den "
+"Wird benötigt, um einen Kontext für den "
 "Publizierungsprozess (z.B. WebPreferences Einstellungen) herzustellen, "
 "selbst wenn alle Seiten in der =Seiten Liste= explizite Bereichsnamen angegeben "
 "haben."
@@ -609,3 +612,6 @@ msgstr "Verarbeitungsoptionen"
 
 msgid "Preferences defined this way can be used in topics (including the history topic) like any other Foswiki preference."
 msgstr "Auf diese Weise gesetzte Einstellungen können in den Artikeln (auch in der Publizierungs-Historie) genutzt werden, wie alle anderen Foswiki-Einstellungen auch."
+
+msgid "Advanced informations..."
+msgstr "Weiterführende Informationen..."
