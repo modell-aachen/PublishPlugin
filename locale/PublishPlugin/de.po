@@ -466,11 +466,6 @@ msgstr ""
 "selbst wenn alle Seiten in der =Seiten Liste= explizite Bereichsnamen angegeben "
 "haben."
 
-#: data/System/PublishPluginModacDialogViewTemplate.txt:231
-#: data/System/PublishPluginModacDialogViewTemplate.txt:249
-msgid "The available formats are:"
-msgstr "Die verfügbaren Formate sind:"
-
 #: data/System/PublishPluginModacDialogViewTemplate.txt:390
 msgid ""
 "The base URL that your published Foswiki topics will reside at, for instance "
@@ -618,3 +613,6 @@ msgstr "Weiterführende Informationen..."
 
 msgid "Choose how the page numbering of multiple topics is being handled."
 msgstr "Hier können Sie einstellen auf welche Weise die Seitennummerierung auf verschiedene Wiki-Seiten übertragen wird."
+
+msgid "Choose the filetype to be published in."
+msgstr "Wälen Sie den Dateitypen zum Publizieren."

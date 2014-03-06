@@ -195,17 +195,13 @@ ISBN=1-56592-149-6
   <tr>
     <td class="nameCol">Output format</td>
     <td class="inputCol">
-      <select name="format_" id="selectedFormat" class="foswikiSelect" style="display:none;">
-        %PUBLISHING_GENERATORS{format="<option>$name</option>" separator=""}%
+      <select name="format" id="selectedFormat" class="foswikiSelect">
+        <option selected='selected'>pdf</option>
+        <option>tgz</option>
       </select>
-<input type="text" name="format" value="pdf" />
     </td>
     <td class="infoCol">
-      %MAKETEXT{"The available formats are:"}%
-      <dl>pdf</dl>
-      <dl style="display:none;">
-        %PUBLISHING_GENERATORS{format="<dt> =$name= </dt><dd>$help</dd>" separator=""}%
-      </dl>
+      %MAKETEXT{"Choose the filetype to be published in."}%
     </td>
   </tr>
   <tr>
