@@ -216,10 +216,7 @@ ISBN=1-56592-149-6
       </select>
     </td>
     <td class="infoCol">
-      %MAKETEXT{"The available formats are:"}%
-      <dl>
-        ...
-      </dl>
+      %MAKETEXT{"Choose how the page numbering of multiple topics is being handled."}%
     </td>
   </tr>
   <tr>

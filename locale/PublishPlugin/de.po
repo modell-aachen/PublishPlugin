@@ -615,3 +615,6 @@ msgstr "Auf diese Weise gesetzte Einstellungen können in den Artikeln (auch in 
 
 msgid "Advanced informations..."
 msgstr "Weiterführende Informationen..."
+
+msgid "Choose how the page numbering of multiple topics is being handled."
+msgstr "Hier können Sie einstellen auf welche Weise die Seitennummerierung auf verschiedene Wiki-Seiten übertragen wird."
