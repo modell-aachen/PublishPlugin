@@ -2,15 +2,105 @@
 
 %{ This template is designed to work with MAPrinceModPlugin and is documented there. }%
 
+%{<verbatim class="tml">}%
 %TMPL:DEF{"printweb"}%%URLPARAM{"web" default="%DEFAULTWEB{default="%WEB%"}%" encode="entity"}%%TMPL:END%
+%{</verbatim>}%
 
+%{<verbatim class="tml">}%
 %TMPL:DEF{"searchtopics"}%%SOLRSEARCH{"workflow_isapproved_b: true type: topic web: %SUBST{text="%TMPL:P{printweb}%" pattern="/" format="."}%" format="$topic" separator="," rows="999" sort="topic"}%%TMPL:END%
+%{</verbatim>}%
 
-%TMPL:DEF{"content"}%
+%{<verbatim class="tml">}%
+%TMPL:DEF{"scripts"}%%JQREQUIRE{"blockui,form"}%
 %ADDTOHEAD{text="<style type=\"text/css\" media=\"all\">@import url('%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.css');</style>"}%
 %ADDTOZONE{"script" id="Modac::PublishPlugin" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.js'></script>"}%
-%JQREQUIRE{"blockui,form"}%
+%TMPL:END%
+%{</verbatim>}%
 
+%{<verbatim class="tml">}%
+%TMPL:DEF{"webselection"}%<select name="web" class="foswikiSelect">%WEBLIST{"<option $marker value='$name'>$name</option>" selection="%TMPL:P{printweb}%"}%</select>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"webselection_info"}%
+%MAKETEXT{"The Web to publish."}%
+%TWISTY{mode="div" showlink="%MAKETEXT{"Advanced informations..."}%"}%
+  %MAKETEXT{"This is required to provide a context for the publishing process (e.g. web preference settings), even if all topics in the =Topic List= have explicit web names."}%
+%ENDTWISTY%
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"topicselection"}%<input type="text" name="topiclist" class="foswikiInputField" value='%URLPARAM{"topiclist" default="%EXPORTTOPICLIST{default="$percentTMPL:P{searchtopics}$percent"}%" encode="entity"}%' size="30" title="%MAKETEXT{"Leave blank to publish all topics in the web"}%"/>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"topicselection_info"}%
+%MAKETEXT{"Comma-separated list of topic names. Leave blank to publish all topics in the web (as filtered by =Include filter= and =Exclude filter=)."}%
+%TWISTY{mode="div" showlink="%MAKETEXT{"Advanced informations..."}%"}%
+  %MAKETEXT{"You can use Foswiki macros (such as %SEARCH...) in this list - for example, to include the contents of a topic that contains a list of topic names in a bulleted list, use [_1]." args="=%<nop>SEARCH{\"^   \*\" type=\"regex\" nonoise=\"on\" topic=\"TheTopic\" format=\"$pattern(.*?^\s*\*\s*(.*?)$.$)\"}<nop>%="}%
+
+  %MAKETEXT{"You can also use the [_1] (see [_2], below) to build such lists, and include them using the [_3] macro." args="[[#BookMaker][Bookmaker]], [[#Using_Bookmaker][Using Bookmaker]], =%<nop>BOOKLIST{\"Bookweb.BookName\"}<nop>%="}%
+
+  %MAKETEXT{"A non-blank =Topic List= is still subject to filtering against =Include filter= and =Exclude filter=."}%
+
+  %MAKETEXT{"Note that this list can include topics in other webs, by referring to them using the =Web.TopicName= syntax."}%
+%ENDTWISTY%
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"history"}%<input type="text" name="history" class="foswikiInputField" size="30" value="PublishPluginHistory" />%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"history_info"}%%MAKETEXT{"This is where the history of your publishing is stored. Each time you publish, this topic is re-written with the log of the publishing process. You have to have \"change\" access to this topic. You can specify a topic in another web using the standard Web.Topic syntax."}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"format"}%
+<select name="format" id="selectedFormat" class="foswikiSelect">
+  <option selected='selected'>pdf</option>
+  <option>tgz</option>
+</select>
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"format_info"}%%MAKETEXT{"Choose the filetype to be published in."}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"numbering"}%
+<select name="PUBLISHPAGES" id="selectedPageFormat" class="foswikiSelect">
+   %FORMATLIST{"Consecutive=%MAKETEXT{"Consecutive"}%, Separate=%MAKETEXT{"Restart numbering for each topic"}%, All=%MAKETEXT{"Treat printout as one big topic"}%" pattern="\s*(.*)=(.*)\s*" format="<option$marker value='$1'>$2</option>" selection="^\s*%PUBLISHPAGES{default="Consecutive"}%=.*" marker=" selected='selected'"}%
+</select>
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"numbering_info"}%%MAKETEXT{"Choose how the page numbering of multiple topics is being handled."}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"outattachment"}%<input type="text" size="30" name="outattachment" value="%OUTATTACHMENT{default="Published%SUBST{text="%TMPL:P{printweb}%" pattern="/" format=""}%"}%.pdf"}%" class="foswikiInputField" title="%MAKETEXT{"Name of the attachment"}%" />%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"outattachment_info"}%%MAKETEXT{"Specify the name of for the attachment."}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"outwebtopic"}%<input type="text" size="30" name="outwebtopic" value="%OUTWEBTOPIC{default="%TMPL:P{printweb}%.%EXPORTTOPIC{default="ExportWeb"}%"}%" class="foswikiInputField" title="%MAKETEXT{"Where to put the attachment"}%" />%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"outwebtopic_info"}%%MAKETEXT{"Specify the topic where the output will be attached."}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"content"}%
+%TMPL:P{"scripts"}%
 <div class="foswikiPageForm">
 <form method="post" name="publish" action="%SCRIPTURL{rest}%/PublishPlugin/publish">
 <table class="foswikiTable publishForm">
@@ -22,13 +112,10 @@
       %MAKETEXT{"Web"}%
     </td>
     <td class="inputCol">
-      <select name="web" class="foswikiSelect">%WEBLIST{"<option $marker value='$name'>$name</option>" selection="%TMPL:P{printweb}%"}%</select>
+      %TMPL:P{"webselection"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"The Web to publish."}%
-      %TWISTY{mode="div" showlink="%MAKETEXT{"Advanced informations..."}%"}%
-        %MAKETEXT{"This is required to provide a context for the publishing process (e.g. web preference settings), even if all topics in the =Topic List= have explicit web names."}%
-      %ENDTWISTY%
+      %TMPL:P{"webselection_info"}%
     </td>
   </tr>
   <tr>
@@ -36,20 +123,10 @@
       %MAKETEXT{"Topic List"}%
     </td>
     <td class="inputCol">
-      <input type="text" name="topiclist" class="foswikiInputField" value='%URLPARAM{"topiclist" default="%EXPORTTOPICLIST{default="$percentTMPL:P{searchtopics}$percent"}%" encode="entity"}%' size="30" title="%MAKETEXT{"Leave blank to publish all topics in the web"}%"/>
-
+      %TMPL:P{"topicselection"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"Comma-separated list of topic names. Leave blank to publish all topics in the web (as filtered by =Include filter= and =Exclude filter=)."}%
-      %TWISTY{mode="div" showlink="%MAKETEXT{"Advanced informations..."}%"}%
-        %MAKETEXT{"You can use Foswiki macros (such as %SEARCH...) in this list - for example, to include the contents of a topic that contains a list of topic names in a bulleted list, use [_1]." args="=%<nop>SEARCH{\"^   \*\" type=\"regex\" nonoise=\"on\" topic=\"TheTopic\" format=\"$pattern(.*?^\s*\*\s*(.*?)$.$)\"}<nop>%="}%
-
-        %MAKETEXT{"You can also use the [_1] (see [_2], below) to build such lists, and include them using the [_3] macro." args="[[#BookMaker][Bookmaker]], [[#Using_Bookmaker][Using Bookmaker]], =%<nop>BOOKLIST{\"Bookweb.BookName\"}<nop>%="}%
-
-        %MAKETEXT{"A non-blank =Topic List= is still subject to filtering against =Include filter= and =Exclude filter=."}%
-
-        %MAKETEXT{"Note that this list can include topics in other webs, by referring to them using the =Web.TopicName= syntax."}%
-      %ENDTWISTY%
+      %TMPL:P{"topicselection_info"}%
     </td>
   </tr>
   <tr>
@@ -195,33 +272,28 @@ ISBN=1-56592-149-6
   <tr>
     <td class="nameCol">Output format</td>
     <td class="inputCol">
-      <select name="format" id="selectedFormat" class="foswikiSelect">
-        <option selected='selected'>pdf</option>
-        <option>tgz</option>
-      </select>
+      %TMPL:P{"format"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"Choose the filetype to be published in."}%
+      %TMPL:P{"format_info"}%
     </td>
   </tr>
   <tr>
     <td class="nameCol">%MAKETEXT{"Page numbering"}%</td>
     <td class="inputCol">
-      <select name="PUBLISHPAGES" id="selectedPageFormat" class="foswikiSelect">
-         %FORMATLIST{"Consecutive=%MAKETEXT{"Consecutive"}%, Separate=%MAKETEXT{"Restart numbering for each topic"}%, All=%MAKETEXT{"Treat printout as one big topic"}%" pattern="\s*(.*)=(.*)\s*" format="<option$marker value='$1'>$2</option>" selection="^\s*%PUBLISHPAGES{default="Consecutive"}%=.*" marker=" selected='selected'"}%
-      </select>
+      %TMPL:P{"numbering"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"Choose how the page numbering of multiple topics is being handled."}%
+      %TMPL:P{"numbering_info"}%
     </td>
   </tr>
   <tr>
     <td class="nameCol">%MAKETEXT{"Publishing history topic"}%</td>
     <td class="inputCol">
-      <input type="text" name="history" class="foswikiInputField" size="30" value="PublishPluginHistory" />
+      %TMPL:P{"history"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"This is where the history of your publishing is stored. Each time you publish, this topic is re-written with the log of the publishing process. You have to have \"change\" access to this topic. You can specify a topic in another web using the standard Web.Topic syntax."}%
+      %TMPL:P{"history_info"}%
     </td>
   </tr>
   <!-- ATTACH OUTPUT OPTIONS -->
@@ -236,19 +308,19 @@ ISBN=1-56592-149-6
   <tr class="expert" class="publishOptionsSet">
     <td class="nameCol">%MAKETEXT{"Output attachment"}%</td>
     <td class="inputCol">
-      <input type="text" size="30" name="outattachment" value="%OUTATTACHMENT{default="Published%SUBST{text="%TMPL:P{printweb}%" pattern="/" format=""}%"}%.pdf"}%" class="foswikiInputField" title="%MAKETEXT{"Name of the attachment"}%" />
+      %TMPL:P{"outattachment"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"Specify the name of for the attachment."}%
+      %TMPL:P{"outattachment_info"}%
     </td>
   </tr>
   <tr class="expert" class="publishOptionsSet">
     <td class="nameCol">%MAKETEXT{"Output topic"}%</td>
     <td class="inputCol">
-      <input type="text" size="30" name="outwebtopic" value="%OUTWEBTOPIC{default="%TMPL:P{printweb}%.%EXPORTTOPIC{default="ExportWeb"}%"}%" class="foswikiInputField" title="%MAKETEXT{"Where to put the attachment"}%" />
+      %TMPL:P{"outwebtopic"}%
     </td>
     <td class="infoCol">
-      %MAKETEXT{"Specify the topic where the output will be attached."}%
+      %TMPL:P{"outwebtopic_info"}%
     </td>
   </tr>
   <!-- FILE OUTPUT OPTIONS -->
@@ -438,3 +510,4 @@ ISBN=1-56592-149-6
 </form>
 </div>
 %TMPL:END%
+%{</verbatim>}%
