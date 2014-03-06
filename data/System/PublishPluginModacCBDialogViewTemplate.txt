@@ -1,0 +1,38 @@
+%TMPL:INCLUDE{"PublishPluginModacDialogView"}%
+
+%{<verbatim class="tml">}%
+%{ define the available options here }%
+%TMPL:DEF{"defaultOption"}%Category1%TMPL:END%
+%TMPL:DEF{"otherOptions"}%%TMPL:P{"option" option="Category2"}%%TMPL:P{"option" option="Category3"}%%TMPL:END%
+%{</verbatim>}%
+
+%{ these rarely need customizing: }%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"topicselection"}%<div class="topicselection">%TMPL:P{"formselection"}%%%IF{"defined debug" then="<nop>"}%SOLRSEARCH{"%TMPL:P{searchString}%" format="<input type='checkbox' name='topiclistCB' checked='checked' value='$webtopic'>$topic - $title</input>" separator="<br />" rows="999" sort="topic"}%
+---
+%%IF{"defined debug" then="<nop>"}%SOLRSEARCH{"type:pdf webtopic: ( dummy%SOLRSEARCH{"%TMPL:P{searchString}%" format="$web.$topic" separator=" OR " header=" OR "}%)" format="<input type='checkbox' name='topiclistCB' value='$web.$topic/$name'>$topic - $name</input>" separator="<br />" rows="999" sort="topic"}%</div>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"scripts"}%%TMPL:PREV%%ADDTOZONE{"script" id="publistopiclist" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/searchtopics.js'></script>"}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"topicselection_info"}%
+%MAKETEXT{"Please select topics and attachments to print."}%
+%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"option"}%<option value="%option%" %IF{"'%URLPARAM{"selected" default="%TMPL:P{defaultOption}%"}%'='%option%'" then="selected='selected'"}%>%option%</option>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{percent}%%%TMPL:END%
+%TMPL:DEF{"formselection"}%<div class="formselection"><select name="formselection">%TMPL:P{percent}%TMPL:P{"option" option="%TMPL:P{defaultOption}%"}%%TMPL:P{"otherOptions"}%</select>%BR%
+<input type="hidden" name="topiclist" value=""/>
+<input type="hidden" name="catpdf" value=""/>
+<input type="hidden" name="viewtemplate" value="%VIEW_TEMPLATE%" />
+%TMPL:END%
+%{</verbatim>}%

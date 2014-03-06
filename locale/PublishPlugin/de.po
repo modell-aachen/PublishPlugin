@@ -616,3 +616,6 @@ msgstr "Hier können Sie einstellen auf welche Weise die Seitennummerierung auf 
 
 msgid "Choose the filetype to be published in."
 msgstr "Wälen Sie den Dateitypen zum Publizieren."
+
+msgid "Please select topics and attachments to print."
+msgstr "Bitte wählen Sie die zu druckenden Seiten und Anhänge aus."
