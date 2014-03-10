@@ -49,6 +49,9 @@ sub param_schema {
         outattachment => {
             default => ''
         },
+        catpdf => {
+            default => ''
+        },
         %{ $class->SUPER::param_schema() }
     };
 }
@@ -89,6 +92,28 @@ sub close {
 
     # Get rid of the temporaries
     File::Path::rmtree($tmpdir);
+
+    if($this->{params}->{catpdf}) {
+        Foswiki::Sandbox::sysCommand(
+            $Foswiki::sharedSandbox,
+            "mv %TOPICS|F% %TMP|F%",
+            TOPICS => "$this->{path}$landed",
+            TMP => "$this->{path}tmp.pdf"
+        );
+        my @catfiles;
+        foreach my $file (split('\s*,\s*',$this->{params}->{catpdf})) {
+            my ($wt, $fname) = $file =~ m#(.*)/(.*)#;
+            my ($fweb, $ftopic) = Foswiki::Func::normalizeWebTopicName(undef, $wt);
+            unshift(@catfiles, "$Foswiki::cfg{PubDir}/$fweb/$ftopic/$fname");
+        }
+        unshift(@catfiles, "$this->{path}tmp.pdf");
+        Foswiki::Sandbox::sysCommand(
+            $Foswiki::sharedSandbox,
+            "pdfunite %FILES|F% %FILE|F%",
+            FILES => \@catfiles,
+            FILE => "$this->{path}$landed"
+        );
+    }
 
     # attach result
     if ( $this->{params}->{outwebtopic} && $this->{params}->{outattachment} ) {
