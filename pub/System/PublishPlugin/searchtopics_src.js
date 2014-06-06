@@ -22,6 +22,6 @@ jQuery(function($){
         var $div = $this.closest('.topicselection');
         $div.block({message:''});
         var viewtemplate = $('input[name="viewtemplate"]:first').val();
-        $div.load(foswiki.getPreference('SCRIPTURLPATH')+'/rest'+foswiki.getPreference('SCRIPTSUFFIX')+'/RenderPlugin/template?name='+encodeURIComponent(viewtemplate)+'&expand=topicselection&render=1&topic='+encodeURIComponent(foswiki.getPreference('WEB')+'/'+foswiki.getPreference('TOPIC'))+'&selected='+encodeURIComponent($this.val()));
+        $div.load(foswiki.getPreference('SCRIPTURLPATH')+'/rest'+foswiki.getPreference('SCRIPTSUFFIX')+'/RenderPlugin/template?name='+encodeURIComponent(viewtemplate)+'&expand=topicselection&render=1&topic='+encodeURIComponent(foswiki.getPreference('WEB')+'.'+foswiki.getPreference('TOPIC'))+'&selected='+encodeURIComponent($this.val()));
     })});
 });
