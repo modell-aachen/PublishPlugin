@@ -25,6 +25,18 @@ jQuery(function($){
         $('form[name="publish"]').find('input[name="topiclistCB"]').prop('checked', false);
         return false;
     });
+    $('form[name="publish"] .topicselection .ajaxOnChange').livequery(function(){$(this).change(function(){
+        var $this = $(this);
+        var $div = $this.closest('.topicselection');
+        $div.block({message:''});
+        var viewtemplate = $('input[name="viewtemplate"]:first').val();
+        var ajaxOnChange = '';
+        $div.find('.ajaxOnChange').each(function(){
+            var $this = $(this);
+            ajaxOnChange += '&'+$this.prop('name')+'='+encodeURIComponent($this.val());
+        });
+        $div.load(foswiki.getPreference('SCRIPTURLPATH')+'/rest'+foswiki.getPreference('SCRIPTSUFFIX')+'/RenderPlugin/template?name='+encodeURIComponent(viewtemplate)+'&expand=topicselection&render=1&topic='+encodeURIComponent(foswiki.getPreference('WEB')+'.'+foswiki.getPreference('TOPIC'))+ajaxOnChange);
+    })});
     $('form[name="publish"] select[name="formselection"]').livequery(function(){$(this).change(function(){
         var $this = $(this);
         var $div = $this.closest('.topicselection');
