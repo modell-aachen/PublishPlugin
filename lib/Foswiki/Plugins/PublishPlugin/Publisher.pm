@@ -880,8 +880,9 @@ sub publishTopic {
 
     # Find and copy resources attached to the topic
     my $pub = Foswiki::Func::getPubUrlPath();
+    my $viewfile = Foswiki::Func::getScriptUrlPath(undef,undef,'viewfile');
     $tmpl =~
-      s!(['"\(])($Foswiki::cfg{DefaultUrlHost}|https?://$hs)?$pub/(.*?)(\1|\))!
+      s!(['"\(])($Foswiki::cfg{DefaultUrlHost}|https?://$hs)?(?:$pub|$viewfile)/?(.*?)(\1|\))!
       $1.$this->_rsrcpath( $w ,$this->_copyResource($3, $copied) ).$4!ge;
 
     my $ilt;
