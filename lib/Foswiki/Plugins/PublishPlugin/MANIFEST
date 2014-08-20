@@ -17,6 +17,9 @@ lib/Foswiki/Plugins/PublishPlugin/BackEnd/pdf.pm 0444
 lib/Foswiki/Plugins/PublishPlugin/BackEnd/tgz.pm 0444
 lib/Foswiki/Plugins/PublishPlugin/BackEnd/zip.pm 0444
 locale/PublishPlugin/de.po 0644
+locale/PublishPlugin/fr.po 0644
+locale/PublishPlugin/it.po 0644
+locale/PublishPlugin/zh-cn.po 0644
 pub/System/PublishPlugin/publish.gif 0644
 pub/System/PublishPlugin/publishplugin.css 0644
 pub/System/PublishPlugin/publishplugin.js 0644
