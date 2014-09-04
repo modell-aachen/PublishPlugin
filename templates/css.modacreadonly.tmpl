@@ -1,0 +1,17 @@
+%TMPL:INCLUDE{"css"}%
+
+%TMPL:DEF{"styles:dynamic"}%<style type="text/css" media="all">
+	/* Styles that are set using variables */
+	.patternBookView .foswikiTopRow,
+	.patternWebIndicator a img,
+	.patternWebIndicator a:hover img {
+		background-color:%WEBBGCOLOR%;
+	}
+	.requireModacChangePermission {
+		display: none !important;
+	}
+	.requireModacMovePermission {
+		display: none !important;
+	}
+	%TMPL:P{"styles:deprecated"}%
+</style>%TMPL:END%

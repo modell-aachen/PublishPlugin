@@ -1,0 +1,13 @@
+%TMPL:INCLUDE{"viewtopicactionbuttons"}%
+
+%TMPL:DEF{"modacActionButtonsVIEW"}%<ul id="modacButtonsLEFT" class="modacTabs">%TMPL:P{"modacButtonsLEFT"}%</ul>%TMPL:END%
+
+%TMPL:DEF{"talktopicactionviewinactivenew"}%%TMPL:END%
+
+%TMPL:DEF{"talktopicactionviewinactive"}%<div class="modacActionButtonINACTIVE">%IF{"istopic '%WEB%.%TOPIC%%WORKFLOWSUFFIX%'" then="$percntTMPL:P{talktopicactionviewinactivelink}$percnt" else="$percntTMPL:P{talktopicactionviewinactivenew}$percnt"}%</div>%TMPL:END%
+
+%TMPL:DEF{"talktopicactionbutton"}%%IF{"$TOPIC ~ '*%WORKFLOWSUFFIX%'" else="$percentTMPL:P{talktopicactionviewinactive}$percent" then="$percentTMPL:P{talktopicactionviewactive}$percent"}%%TMPL:END%
+
+%TMPL:DEF{"topictabaction"}%%IF{"$TOPIC ~ '*%WORKFLOWSUFFIX%'" else="$percentTMPL:P{approvedtopicactionbuttonactive}$percent" then="$percentTMPL:P{approvedtopicactionbuttoninactive}$percent"}%%TMPL:END%
+
+%TMPL:DEF{approvedtopicactionbuttoninactive}%%IF{"$TOPIC = '%WORKFLOWORIGIN{"%TOPIC%"}%' OR NOT istopic '%WEB%.%WORKFLOWORIGIN{"%TOPIC%"}%'" then="<a><strike>%MAKETEXT{%GETWORKFLOWROW{lefttab}%}%</strike></a>" else="<a href='$percentSCRIPTURLPATH{$quotview$quot}$percent/$percentWEB$percent/$percentWORKFLOWORIGIN{\"%TOPIC%\"}$percent' rel='nofollow' title='$percentMAKETEXT{$percentGETWORKFLOWROW{lefttab}$percent}$percent' >$percentMAKETEXT{$percentGETWORKFLOWROW{lefttab}$percent}$percent</a>"}%%TMPL:END%
