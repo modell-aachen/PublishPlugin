@@ -76,6 +76,7 @@ sub addString {
 
 sub addFile {
     my ( $this, $from, $to ) = @_;
+    $to =~ s#^/##;
     $this->{logger}->logError("Error adding $from")
       unless $this->{zip}->addFile( $from, $to );
 }
