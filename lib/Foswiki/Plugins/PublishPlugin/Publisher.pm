@@ -1080,7 +1080,7 @@ sub _copyResource {
                 close($fh);
                 $data =~ s#\/\*.*?\*\/##gs;    # kill comments
                 foreach my $line ( split( /\r?\n/, $data ) ) {
-                    if ( $line =~ /url\(["']?(.*?)["']?\)/ ) {
+                    while ( $line =~ /url\(["']?(.*?)["']?\)/g ) {
                         push @moreResources, $1;
                     }
                 }
