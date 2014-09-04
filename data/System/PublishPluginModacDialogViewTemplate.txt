@@ -149,7 +149,7 @@
             %MAKETEXT{"Exclude filter"}%
           </td>
           <td class="inputCol"> 
-            <input type="text" name="exclusions" class="foswikiInputField" value="%URLPARAM{"exclusions" default="" encode="entity"}%" size="30" title="%MAKETEXT{"Leave blank to include all topics in the topic list"}%" />
+            %TMPL:P{"exclusions"}%
           </td>
           <td class="infoCol">
             %MAKETEXT{"Comma-separated list of [_1] that match the names of topics to exclude. This acts as a filter on the topic list. Leave blank to include all topics in the topic list." args="[[#WildcardPattern][%MAKETEXT{"wildcard patterns"}%]]"}%
@@ -199,7 +199,7 @@
         <tr class="expert">
           <td class="nameCol">%MAKETEXT{"Publish skin"}%</td>
           <td class="inputCol">
-            <input type="text" name="publishskin" class="foswikiInputField" size="20" value="%SKIN%" title="%MAKETEXT{"Use basic_publish unless you have your own customised publishing skin"}%"/>
+            %TMPL:P{"publishskin"}%
           </td>
           <td class="infoCol">
             %MAKETEXT{"The skin provides the template for how topics are published. See [_1] for more informations on skins." args="[[%SYSTEMWEB%.Skins][%MAKETEXT{"Skins"}%]]"}%
@@ -210,7 +210,7 @@
         <tr class="expert">
           <td class="nameCol">Preferences </td>
           <td class="inputCol">
-            <textarea name="preferences" class="foswikiInputField" rows="5" cols="80">JQREQUIRE=</textarea>
+            %TMPL:P{"preferences"}%
           </td>
           <td class="infoCol">
           %MAKETEXT{"Lets you define Foswiki [_1] that will be available for use in topics during this publishing run. Define preferences one per line, using the syntax =PREFERENCE=VALUE= - for example," args="[[PreferenceSettings][%MAKETEXT{"preferences"}%]]"}% <verbatim>
@@ -236,7 +236,7 @@ ISBN=1-56592-149-6
         <tr class="expert">
           <td class="nameCol">Templates </td>
           <td class="inputCol">
-            <input type="text" name="templates" class="foswikiInputField" size="20" value="viewprint" title="%MAKETEXT{"Use view unless you need a special template"}%"/>
+            %TMPL:P{"templates"}%
           </td>
           <td class="infoCol">
           %MAKETEXT{"Comma-separated list of template names."}%
@@ -510,4 +510,20 @@ ISBN=1-56592-149-6
 </form>
 </div>
 %TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"templates"}%<input type="text" name="templates" class="foswikiInputField" size="20" value="viewprint" title="%MAKETEXT{"Use view unless you need a special template"}%"/>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"publishskin"}%<input type="text" name="publishskin" class="foswikiInputField" size="20" value="%SKIN%" title="%MAKETEXT{"Use basic_publish unless you have your own customised publishing skin"}%"/>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"exclusions"}%<input type="text" name="exclusions" class="foswikiInputField" value="%URLPARAM{"exclusions" default="" encode="entity"}%" size="30" title="%MAKETEXT{"Leave blank to include all topics in the topic list"}%" />%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"preferences"}%<textarea name="preferences" class="foswikiInputField" rows="5" cols="80">JQREQUIRE=</textarea>%TMPL:END%
 %{</verbatim>}%
