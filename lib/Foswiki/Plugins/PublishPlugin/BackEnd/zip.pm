@@ -26,6 +26,7 @@ use constant DESCRIPTION =>
 
 use Foswiki::Func;
 use File::Path;
+use Error qw( :try );
 
 sub new {
     my $class = shift;
@@ -47,6 +48,15 @@ sub param_schema {
             default => 'zip',
             validator =>
               \&Foswiki::Plugins::PublishPlugin::Publisher::validateFilename
+        },
+        outwebtopic => {
+            default => ''
+        },
+        outattachment => {
+            default => ''
+        },
+        catpdf => {
+            default => ''
         },
         %{ $class->SUPER::param_schema() }
     };
@@ -83,6 +93,27 @@ sub close {
     my $landed = "$this->{params}->{outfile}.zip";
     $this->{logger}->logError("Error writing $landed")
       if $this->{zip}->writeToFileNamed("$this->{path}$landed");
+
+    # attach result
+    if ( $this->{params}->{outwebtopic} && $this->{params}->{outattachment} ) {
+        my $attachment = "$this->{path}$landed";
+        my ( $outweb, $outtopic ) = Foswiki::Func::normalizeWebTopicName( undef, $this->{params}->{outwebtopic} );
+        my $size = -s $attachment;
+        try {
+            if ( !Foswiki::Func::topicExists( $outweb, $outtopic) ) {
+                my $meta = undef; # TODO
+                Foswiki::Func::saveTopic( $outweb, $outtopic, $meta, '%MAKETEXT{"ISO Export"}%' );
+            }
+            my $outattachment = $this->{params}->{outattachment};
+            Foswiki::Func::saveAttachment( $outweb, $outtopic, $outattachment, { file => $attachment, filesize => $size } );
+            $this->{logger}->logInfo( "Attached CD image to", "<a href='$Foswiki::cfg{PubUrlPath}/$outweb/$outtopic/$outattachment'>$outattachment</a>" );
+        } otherwise {
+            my $e = shift;
+            Foswiki::Func::writeWarning( $e );
+            $this->{logger}->logError( $e );
+        };
+    }
+
     return $landed;
 }
 
