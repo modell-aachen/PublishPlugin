@@ -70,6 +70,11 @@ sub addFile {
       unless $this->{zip}->addFile( $from, $to );
 }
 
+sub addIndex {
+    my ( $this, $string ) = @_;
+    $this->addString( $string, 'index.html' );
+}
+
 sub close {
     my $this = shift;
     my $dir  = $this->{path};

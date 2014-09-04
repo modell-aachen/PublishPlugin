@@ -509,6 +509,9 @@ sub _publishWeb {
         File::Path::mkpath($dir);
 
         $this->{archive} = $this->{generator}->new( $this, $dir, $this );
+        $this->{archive}->addIndex(Foswiki::Func::expandCommonVariables(<<HTML, $web)) if $this->{archive}->can('addIndex');
+<html><head><title>Published</title></head><body>%INDEXDESCRIPTION{default="<a href='./$web/$Foswiki::cfg{HomeTopicName}.html'>$Foswiki::cfg{HomeTopicName}</a>"}%</body></html>
+HTML
 
         $this->publishUsingTemplate($template);
 

@@ -52,12 +52,19 @@ sub param_schema {
         catpdf => {
             default => ''
         },
+        firstpage => {
+            default => '%URLS%'
+        },
         %{ $class->SUPER::param_schema() }
     };
 }
 
 sub close {
     my $this = shift;
+
+    # Create index.html
+    my $index = $this->_createIndex( \@{ $this->{urls} } );
+    $this->addString( $index, 'index.html' );
 
     # Make the path to the publish dir
     my $dir = $this->{path};
@@ -136,6 +143,41 @@ sub close {
     }
 
     return $landed;
+}
+
+sub _createIndex {
+    my $this     = shift;
+    my $filesRef = shift;       #( \@{$this->{files}} )
+    my $html     = << "HERE";
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css" media="all">
+html body {
+        font-size:104%; /* to change the site's font size, change .foswikiPage below */
+        voice-family:"\\"}\\"";
+        voice-family:inherit;
+        font-family:arial, verdana, sans-serif;
+        font-size:small;
+}
+</style>
+</head>
+<body>
+$this->{params}->{firstpage}
+</body>
+</html>
+HERE
+
+    my $urls = join(
+        "\n",
+        map {
+                "<a href='$_'>$_</a></br>"
+        } grep { !/^(?:index.html|default.htm)$/ } @$filesRef
+    );
+
+    $html =~ s/%URLS%/$urls/;
+
+    return $html;
 }
 
 1;
