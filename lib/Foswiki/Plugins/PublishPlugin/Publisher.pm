@@ -1027,6 +1027,13 @@ sub _copyResource {
         my $bareRsrcName = $rsrcName;
         $bareRsrcName =~ s/\?.*//o;
 
+        # poor man's relative path resolver: strip "//" and "/./", resolve "/../"
+        $bareRsrcName =~ s#/\./#/#g;
+        $bareRsrcName =~ s#//#/#g;
+        while($bareRsrcName =~ s#/[^/]+/../#/#) {
+            next; # continue resolving /../
+        }
+
         # Nope, it's new. Gotta copy it to new location.
         # Split resource name into path (relative to pub/%WEB%) and leaf name.
         my $file = $bareRsrcName;
