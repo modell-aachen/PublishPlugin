@@ -30,3 +30,6 @@ $Foswiki::cfg{PublishPlugin}{PDFCmd} = 'htmldoc --webpage --links --linkstyle pl
 # and Foswiki::inlineAlert reloads its template each time it is called
 # (at least, it does for some versions of Foswiki).
 $Foswiki::cfg{PublishPlugin}{PurgeTemplates} = 0;
+# **PERL H**
+# This setting is required to enable executing the publisher with a modified webserver config (cgi).
+$Foswiki::cfg{SwitchBoard}{publish} = ['Foswiki::Plugins::PublishPlugin', '_publishRESTHandler', { 'publish' => 1 }];

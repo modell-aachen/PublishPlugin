@@ -1,3 +1,4 @@
+bin/publish 0755
 data/System/PublishPlugin.txt 0664
 data/System/PublishPluginModacDialog.txt 0664
 data/System/PublishPluginModacCBDialogViewTemplate.txt 0664

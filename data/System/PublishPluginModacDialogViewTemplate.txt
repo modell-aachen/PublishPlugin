@@ -102,7 +102,7 @@
 %TMPL:DEF{"content"}%
 %TMPL:P{"scripts"}%
 <div class="foswikiPageForm">
-<form method="post" name="publish" action="%SCRIPTURL{rest}%/PublishPlugin/publish">
+<form method="post" name="publish" action="%SCRIPTURL{publish}%">
 <table class="foswikiTable publishForm">
   <tr>
     <th colspan="3">%MAKETEXT{"Choose what to publish"}%</th>
