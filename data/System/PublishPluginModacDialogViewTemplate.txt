@@ -305,7 +305,7 @@ ISBN=1-56592-149-6
        %MAKETEXT{"When exporting to PDF or TGZ the result will be attached to a topic."}%
     </td>
   </tr>
-  <tr class="expert" class="publishOptionsSet">
+  <tr class="expert publishOptionsSet">
     <td class="nameCol">%MAKETEXT{"Output attachment"}%</td>
     <td class="inputCol">
       %TMPL:P{"outattachment"}%
@@ -314,7 +314,7 @@ ISBN=1-56592-149-6
       %TMPL:P{"outattachment_info"}%
     </td>
   </tr>
-  <tr class="expert" class="publishOptionsSet">
+  <tr class="expert publishOptionsSet">
     <td class="nameCol">%MAKETEXT{"Output topic"}%</td>
     <td class="inputCol">
       %TMPL:P{"outwebtopic"}%
@@ -336,7 +336,7 @@ ISBN=1-56592-149-6
     <td colspan="3">
       %TWISTY{mode="div" showlink="%MAKETEXT{"Show file output options..."}%"}%
       <table class="foswikiTable publishForm">
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">Output file </td>
           <td class="inputCol">
             <input type="text" size="30" name="outfile" value="" class="foswikiInputField" title="%MAKETEXT{"Defaults to the name of the generator"}%" />
@@ -345,7 +345,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"Specify the root of the target output file name."}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">Google file </td>
           <td class="inputCol">
             <input type="text" size="30" name="googlefile" value="" class="foswikiInputField" title="%MAKETEXT{"Leave blank if you don't need one"}%" />
@@ -354,7 +354,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"Generates the \"HTML verification file\" needed to verify your site claim. See [_1]." args="<a href=\"http://www.google.com/webmasters/sitemaps/\">Google webmaster tools</a>"}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">%MAKETEXT{"Default page (topic)"}%</td>
           <td class="inputCol">
             <input type="text" size="30" name="defaultpage" value="WebHome" class="foswikiInputField" />
@@ -363,7 +363,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"Name of topic to used to generate default.htm, index.html"}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">
             %MAKETEXT{"Extended directory path"}%
           </td>
@@ -376,7 +376,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"See [_1] for a complete description of where the output is generated." args="[[%SYSTEMWEB%.PublishPlugin#WhereToFindTheOutput][%MAKETEXT{"where to find the output"}%]]"}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">
             %MAKETEXT{"Resource Directory"}%
           </td>
@@ -387,7 +387,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"When publishing to HTML, attachments, icons, etc, are output to this directory. The directory name is relative to the root of your published site."}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">
             %MAKETEXT{"Relative URL"}%
           </td>
