@@ -83,7 +83,7 @@
 %{</verbatim>}%
 
 %{<verbatim class="tml">}%
-%TMPL:DEF{"outattachment"}%<input type="text" size="30" name="outattachment" value="%OUTATTACHMENT{default="Published%SUBST{text="%TMPL:P{printweb}%" pattern="/" format=""}%"}%.pdf"}%" class="foswikiInputField" title="%MAKETEXT{"Name of the attachment"}%" />%TMPL:END%
+%TMPL:DEF{"outattachment"}%<input type="text" size="30" name="outattachment" value="%OUTATTACHMENT{default="Published%SUBST{text="%TMPL:P{printweb}%" pattern="/" format=""}%"}%.pdf" class="foswikiInputField" title="%MAKETEXT{"Name of the attachment"}%" />%TMPL:END%
 %{</verbatim>}%
 
 %{<verbatim class="tml">}%
