@@ -117,4 +117,15 @@ sub close {
     return $landed;
 }
 
+sub notIncludedLink {
+    my ($this, $web, $path, $params, $anchor) = @_;
+
+    $this->addString(Foswiki::Func::expandCommonVariables(<<HTML, $web), "$web/_NotIncluded.html");
+<html><head><title>Published</title></head><body>%NOTINCLUDEDMESSAGE{default="<h1>%MAKETEXT{"Unfortunately the link you clicked is not available in this export."}%</h1>"}%</body></html>
+HTML
+
+    return File::Spec->abs2rel("$web/_NotIncluded", $web).".html?$path$params$anchor";
+}
+
+
 1;

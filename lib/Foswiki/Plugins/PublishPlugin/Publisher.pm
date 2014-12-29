@@ -1136,7 +1136,11 @@ sub _topicURL {
     }
 
     # Is this a path to a known topic? If not, reform the original URL
-    return "$root/$path$params$anchor" unless $this->{topics}->{$path};
+    unless ( $this->{topics}->{$path} ) {
+        my $host = Foswiki::Func::getUrlHost();
+        return "$root/$path$params$anchor" unless ($root =~ m#^(?:$host|/)# && $this->{archive}->can('notIncludedLink'));
+        return $this->{archive}->notIncludedLink($this->{web}, $path, $params, $anchor);
+    }
 
     # For here on we know we're dealing with a topic link, so we
     # ignore params in the rewritten URL - they won't be any use
