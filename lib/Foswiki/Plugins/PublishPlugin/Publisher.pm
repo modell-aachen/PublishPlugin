@@ -1020,19 +1020,19 @@ sub _copyResource {
         $this->logError("--- FIXED UP to $rsrcName");
     }
 
+    # strip off things like ?version=wossname arguments appended to .js
+    my $bareRsrcName = $rsrcName;
+    $bareRsrcName =~ s/\?.*//o;
+
+    # poor man's relative path resolver: strip "//" and "/./", resolve "/../"
+    $bareRsrcName =~ s#/\./#/#g;
+    $bareRsrcName =~ s#//#/#g;
+    while($bareRsrcName =~ s#/[^/]+/../#/#) {
+        next; # continue resolving /../
+    }
+
     # See if we've already copied this resource.
     unless ( exists $copied->{$rsrcName} ) {
-
-        # strip off things like ?version=wossname arguments appended to .js
-        my $bareRsrcName = $rsrcName;
-        $bareRsrcName =~ s/\?.*//o;
-
-        # poor man's relative path resolver: strip "//" and "/./", resolve "/../"
-        $bareRsrcName =~ s#/\./#/#g;
-        $bareRsrcName =~ s#//#/#g;
-        while($bareRsrcName =~ s#/[^/]+/../#/#) {
-            next; # continue resolving /../
-        }
 
         # Nope, it's new. Gotta copy it to new location.
         # Split resource name into path (relative to pub/%WEB%) and leaf name.
