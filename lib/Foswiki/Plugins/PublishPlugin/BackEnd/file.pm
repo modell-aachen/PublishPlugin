@@ -72,6 +72,8 @@ sub addDirectory {
     $this->{logger}->logError($@) if $@;
     umask($oldmask);
     push( @{ $this->{dirs} }, $name );
+
+    return $name;
 }
 
 sub addString {
@@ -106,6 +108,8 @@ sub addString {
             $this->{logger}->logInfo( $topic, '(default.htm, index.html)' );
         }
     }
+
+    return $file;
 }
 
 sub _catString {
@@ -122,6 +126,8 @@ sub _catString {
         $data = $string;
     }
     $this->addString( $data, $file );
+
+    return $file;
 }
 
 sub addFile {
@@ -134,6 +140,8 @@ sub addFile {
     utime( @stat[ 8, 9 ], $dest );
     die if $to =~ /index.html/;
     push( @{ $this->{files} }, $to );
+
+    return $to;
 }
 
 sub close {

@@ -27,6 +27,8 @@ use constant DESCRIPTION =>
 use Foswiki::Func;
 use File::Path;
 use Error qw( :try );
+use Text::Unidecode;
+use Encode;
 
 sub new {
     my $class = shift;
@@ -37,6 +39,8 @@ sub new {
     eval 'use Archive::Zip qw( :ERROR_CODES :CONSTANTS )';
     die $@ if $@;
     $this->{zip} = Archive::Zip->new();
+
+    $this->{zipped} = {}; # remember zipped names to resolve collisions
 
     return $this;
 }
@@ -62,23 +66,66 @@ sub param_schema {
     };
 }
 
+sub decodeUri {
+    my ( $this, $file ) = @_;
+
+    $file = decode($Foswiki::cfg{Site}{CharSet}, $file);
+    $file = unidecode($file);
+
+    $file =~ s#^/##;
+
+    return $file;
+}
+
+# resolve collisions due to umlauts etc.
+# also windows might get stung by up/lower cased letters
+sub addToZip {
+    my ( $this, $file ) = @_;
+
+    my $original = $file;
+    my $collision = 0;
+    while($this->{zipped}->{$file} || $this->{zipped}->{lc($file)}) {
+        $collision++;
+        $file = $original;
+        $file =~ s#(\.[^.]*)?$#_$collision$1#;
+    }
+    $this->{zipped}->{$file} = 1;
+    $this->{zipped}->{lc($file)} = 1;
+
+    return $file;
+}
+
 sub addDirectory {
     my ( $this, $dir ) = @_;
+
+    $dir = $this->decodeUri($dir);
+
     $this->{logger}->logError("Error adding $dir")
       unless $this->{zip}->addDirectory($dir);
+
+    return $dir;
 }
 
 sub addString {
     my ( $this, $string, $file ) = @_;
+    $file = $this->decodeUri($file);
+    $file = $this->addToZip($file);
+
     $this->{logger}->logError("Error adding $string")
       unless $this->{zip}->addString( $string, $file );
+
+    return $file;
 }
 
 sub addFile {
     my ( $this, $from, $to ) = @_;
-    $to =~ s#^/##;
+    $to = $this->decodeUri($to);
+    $to = $this->addToZip($to);
+
     $this->{logger}->logError("Error adding $from")
       unless $this->{zip}->addFile( $from, $to );
+
+    return $to;
 }
 
 sub addIndex {
@@ -121,9 +168,11 @@ sub close {
 sub notIncludedLink {
     my ($this, $web, $path, $params, $anchor) = @_;
 
-    $this->addString(Foswiki::Func::expandCommonVariables(<<HTML, $web), "$web/_NotIncluded.html");
+    unless ( $this->{zipped}->{"$web/_NotIncluded.html"}  ) {
+        $this->addString(Foswiki::Func::expandCommonVariables(<<HTML, $web), "$web/_NotIncluded.html");
 <html><head><title>Published</title></head><body>%NOTINCLUDEDMESSAGE{default="<h1>%MAKETEXT{"Unfortunately the link you clicked is not available in this export."}%</h1>"}%</body></html>
 HTML
+    }
 
     return File::Spec->abs2rel("$web/_NotIncluded", $web).".html?$path$params$anchor";
 }

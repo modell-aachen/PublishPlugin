@@ -8,6 +8,7 @@ use Foswiki::Func;
 use Error ':try';
 use Assert;
 use Foswiki::Plugins::PublishPlugin::PageAssembler;
+use URI::Escape;
 
 sub CHECKLEAK { 0 }
 
@@ -1005,6 +1006,8 @@ sub _copyResource {
     my ( $this, $srcName, $copied ) = @_;
     my $rsrcName = $srcName;
 
+    $rsrcName = uri_unescape($rsrcName);
+
     # Trim the resource name, as they can sometimes pick up whitespaces
     $rsrcName =~ /^\s*(.*?)\s*$/;
     $rsrcName = $1;
@@ -1063,10 +1066,10 @@ sub _copyResource {
             my $dest = "$this->{rsrcdir}/$path/$file";
             $dest =~ s!//!/!g;
             if ( -d $src ) {
-                $this->{archive}->addDirectory( $src, $dest );
+                $dest = $this->{archive}->addDirectory( $src, $dest );
             }
             else {
-                $this->{archive}->addFile( $src, $dest );
+                $dest = $this->{archive}->addFile( $src, $dest );
             }
 
             # Record copy so we don't duplicate it later.
