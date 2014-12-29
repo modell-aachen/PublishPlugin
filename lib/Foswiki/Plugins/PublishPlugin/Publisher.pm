@@ -1034,8 +1034,10 @@ sub _copyResource {
         next; # continue resolving /../
     }
 
+    return '' if $rsrcName eq '';
+
     # See if we've already copied this resource.
-    unless ( $rsrcName eq '' || exists $copied->{$rsrcName} ) {
+    unless ( exists $copied->{$rsrcName} ) {
 
         # Nope, it's new. Gotta copy it to new location.
         # Split resource name into path (relative to pub/%WEB%) and leaf name.
