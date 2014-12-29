@@ -61,7 +61,7 @@
 %TMPL:DEF{"format"}%
 <select name="format" id="selectedFormat" class="foswikiSelect">
   <option selected='selected'>pdf</option>
-  <option>tgz</option>
+  <option>zip</option>
 </select>
 %TMPL:END%
 %{</verbatim>}%
