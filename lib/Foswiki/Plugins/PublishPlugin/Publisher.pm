@@ -1239,7 +1239,11 @@ sub _rsrcpath {
     # if path is already relative or URLish, return it
     return $rsrcloc if $rsrcloc =~ m{^(\.+/|[a-z]+:)};
 
-    $odir = "/$odir" unless $odir =~ /^\//;
+    # make sure path is relative for both
+    $rsrcloc = ".$rsrcloc" if $rsrcloc =~ /^\//;
+    $rsrcloc = "./$rsrcloc" unless $rsrcloc =~ /^\.\//;
+    $odir = ".$odir" if $odir =~ /^\//;
+    $odir = "./$odir" unless $odir =~ /^\.\//;
 
     # See if the generator wants to deal with this resource
     my $nloc;
