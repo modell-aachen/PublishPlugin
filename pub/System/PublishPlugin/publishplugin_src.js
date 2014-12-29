@@ -15,6 +15,7 @@ jQuery(function($) {
                 StrikeOne.submit($form[0]);
             }
             if($.blockUI !== undefined) $.blockUI();
+            if(foswiki.searchtopic) foswiki.searchtopic.call($form);
         },
         success: function(data) {
             if($.blockUI !== undefined) $.unblockUI();
