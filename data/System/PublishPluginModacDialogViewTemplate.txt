@@ -13,7 +13,7 @@
 %{<verbatim class="tml">}%
 %TMPL:DEF{"scripts"}%%JQREQUIRE{"blockui,form"}%
 %ADDTOHEAD{text="<style type=\"text/css\" media=\"all\">@import url('%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.css');</style>"}%
-%ADDTOZONE{"script" id="Modac::PublishPlugin" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.js'></script>"}%
+%ADDTOZONE{"script" id="Modac::PublishPlugin" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.js'></script>" requires="JQUERYPLUGIN::FOSWIKI"}%
 %TMPL:END%
 %{</verbatim>}%
 

@@ -15,7 +15,7 @@
 %{</verbatim>}%
 
 %{<verbatim class="tml">}%
-%TMPL:DEF{"scripts"}%%TMPL:PREV%%ADDTOZONE{"script" id="publistopiclist" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/searchtopics.js'></script>"}%%TMPL:END%
+%TMPL:DEF{"scripts"}%%TMPL:PREV%%ADDTOZONE{"script" id="publistopiclist" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/searchtopics.js'></script>" requires="JQUERYPLUGIN::FOSWIKI"}%%TMPL:END%
 %{</verbatim>}%
 
 %{<verbatim class="tml">}%
