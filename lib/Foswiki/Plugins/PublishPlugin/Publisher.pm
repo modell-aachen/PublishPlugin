@@ -219,11 +219,14 @@ sub new {
       || 'basic_publish';
 
     $this->{historyText} = '';
+
+    $this->{AccessDeniedCache} = {}; # cache acls; Access denied -> 1
     return $this;
 }
 
 sub finish {
     my $this = shift;
+    $this->{AccessDeniedCache} = undef;
     $this->{session} = undef;
 }
 
@@ -731,8 +734,11 @@ sub publishTopic {
       )
     {
         $this->logError("View access to $topic denied");
+        $this->{AccessDeniedCache}->{$w}{$t} = 1;
         return;
     }
+
+    $this->{AccessDeniedCache}->{$w}{$t} = 0;
 
     if ( $this->{topicsearch} && $text =~ /$this->{topicsearch}/ ) {
         $this->logInfo( $topic, "excluded by filter" );
@@ -997,6 +1003,18 @@ sub _filetypeForTemplate {
     return '.html';
 }
 
+sub cacheACLs {
+    my ($this, $web, $topic) = @_;
+
+    my $acl = $this->{AccessDeniedCache}->{$web}{$topic};
+    if(not defined $acl) {
+        my $wikiname = Foswiki::Func::getWikiName();
+        $acl = ( ( $web !~ m/^System/ and ( not Foswiki::Func::topicExists( $web, $topic ) or not Foswiki::Func::checkAccessPermission( 'VIEW', $wikiname,  undef, $topic, $web ) ) ) ? 1 : 0 );
+        $this->{AccessDeniedCache}->{$web}{$topic} = $acl;
+    };
+    return $acl;
+}
+
 #  Copy a resource (image, style sheet, etc.) from pub/%WEB% to
 #   static HTML's rsrc directory.
 #   * =$this->{web}= - name of web
@@ -1052,8 +1070,7 @@ sub _copyResource {
         # Block access if file is not in system and user has no view access to topic.
         # If topic does not exist, block as well; this filters things like 'Main/../Main/MySecret/Secret.png'.
         my ( $fweb, $ftopic ) = Foswiki::Func::normalizeWebTopicName( undef, $path );
-        my $wikiname = Foswiki::Func::getWikiName();
-        if ( $fweb !~ m/^System/ and ( not Foswiki::Func::topicExists( $fweb, $ftopic ) or not Foswiki::Func::checkAccessPermission( 'VIEW', $wikiname,  undef, $ftopic, $fweb ) ) ) {
+        if ($this->cacheACLs($fweb, $ftopic)) {
             $file = 'err.png';
             $path = $Foswiki::cfg{SystemWebName}.'/MAPrinceModPlugin';
             $bareRsrcName = "$path/$file";
