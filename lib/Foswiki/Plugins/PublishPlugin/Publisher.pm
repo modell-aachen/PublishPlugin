@@ -297,6 +297,7 @@ sub publish {
     my ( $this, @webs ) = @_;
 
     $this->{publisher} = Foswiki::Func::getWikiName();
+    $this->{publisherUID} = Foswiki::Func::getCanonicalUserID();
 
     #don't add extra markup for topics we're not linking too
     # NEWTOPICLINKSYMBOL LINKTOOLTIPINFO
@@ -728,9 +729,7 @@ sub publishTopic {
     }
 
     unless (
-        Foswiki::Func::checkAccessPermission(
-            "VIEW", $this->{publisher}, $text, $t, $w
-        )
+        $meta->haveAccess( 'VIEW', $this->{publisherUID} )
       )
     {
         $this->logError("View access to $topic denied");
