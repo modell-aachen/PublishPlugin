@@ -1,4 +1,4 @@
-%TMPL:INCLUDE{"view"}%
+%TMPL:INCLUDE{"SystemView"}%
 
 %{ This template is designed to work with MAPrinceModPlugin and is documented there. }%
 
