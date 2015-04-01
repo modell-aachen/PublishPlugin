@@ -2,11 +2,16 @@ jQuery(function($) {
     var $pform = $("form[name='publish']");
     if(!$pform.length) return;
 
-    $pform.find("select[name='web']").change(function(){
-        var $this = $(this);
-        var web = $(this).val();
+    $pform.find("select[name='web'],.reloadTopicList").change(function(){
+        var params = '?web=' + $("[name='web']").val();
+        $('.reloadTopicList').each(function() {
+            var $this = $(this);
+            var val = $this.val();
+            var name = $this.attr('name');
+            params += ';'+name + '=' + encodeURIComponent(val);
+        });
         if($.blockUI !== undefined) $.blockUI();
-        window.location.replace(foswiki.getPreference('SCRIPTURL') + '/view' + foswiki.getPreference('SCRIPTSUFFIX') + '/' + foswiki.getPreference('WEB') + '/' + foswiki.getPreference('TOPIC') + '?web=' + encodeURIComponent(web));
+        window.location.replace(foswiki.getPreference('SCRIPTURL') + '/view' + foswiki.getPreference('SCRIPTSUFFIX') + '/' + foswiki.getPreference('WEB') + '/' + foswiki.getPreference('TOPIC') + params);
     });
 
     if($pform.ajaxForm) $pform.ajaxForm({
