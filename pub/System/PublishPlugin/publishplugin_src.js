@@ -33,6 +33,10 @@ jQuery(function($) {
             } else {
                 $('.foswikiTopic:first').replaceWith($dTopic);
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            if($.blockUI !== undefined) $.unblockUI();
+            alert('Error: ' + textStatus + '\n' + errorThrown);
         }
     });
 });
