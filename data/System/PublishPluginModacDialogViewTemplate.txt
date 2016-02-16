@@ -1,4 +1,4 @@
-%TMPL:INCLUDE{"view"}%
+%TMPL:INCLUDE{"SystemView"}%
 
 %{ This template is designed to work with MAPrinceModPlugin and is documented there. }%
 
@@ -13,7 +13,7 @@
 %{<verbatim class="tml">}%
 %TMPL:DEF{"scripts"}%%JQREQUIRE{"blockui,form"}%
 %ADDTOHEAD{text="<style type=\"text/css\" media=\"all\">@import url('%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.css');</style>"}%
-%ADDTOZONE{"script" id="Modac::PublishPlugin" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.js'></script>"}%
+%ADDTOZONE{"script" id="Modac::PublishPlugin" text="<script type='text/javascript' src='%PUBURLPATH%/%SYSTEMWEB%/PublishPlugin/publishplugin.js'></script>" requires="JQUERYPLUGIN::FOSWIKI"}%
 %TMPL:END%
 %{</verbatim>}%
 
@@ -61,7 +61,7 @@
 %TMPL:DEF{"format"}%
 <select name="format" id="selectedFormat" class="foswikiSelect">
   <option selected='selected'>pdf</option>
-  <option>tgz</option>
+  <option>zip</option>
 </select>
 %TMPL:END%
 %{</verbatim>}%
@@ -83,7 +83,7 @@
 %{</verbatim>}%
 
 %{<verbatim class="tml">}%
-%TMPL:DEF{"outattachment"}%<input type="text" size="30" name="outattachment" value="%OUTATTACHMENT{default="Published%SUBST{text="%TMPL:P{printweb}%" pattern="/" format=""}%"}%.pdf"}%" class="foswikiInputField" title="%MAKETEXT{"Name of the attachment"}%" />%TMPL:END%
+%TMPL:DEF{"outattachment"}%<input type="text" size="30" name="outattachment" value="%OUTATTACHMENT{default="Published%SUBST{text="%TMPL:P{printweb}%" pattern="/" format=""}%"}%.pdf" class="foswikiInputField" title="%MAKETEXT{"Name of the attachment"}%" />%TMPL:END%
 %{</verbatim>}%
 
 %{<verbatim class="tml">}%
@@ -102,7 +102,7 @@
 %TMPL:DEF{"content"}%
 %TMPL:P{"scripts"}%
 <div class="foswikiPageForm">
-<form method="post" name="publish" action="%SCRIPTURL{rest}%/PublishPlugin/publish">
+<form method="post" name="publish" action="%SCRIPTURL{publish}%">
 <table class="foswikiTable publishForm">
   <tr>
     <th colspan="3">%MAKETEXT{"Choose what to publish"}%</th>
@@ -149,7 +149,7 @@
             %MAKETEXT{"Exclude filter"}%
           </td>
           <td class="inputCol"> 
-            <input type="text" name="exclusions" class="foswikiInputField" value="%URLPARAM{"exclusions" default="" encode="entity"}%" size="30" title="%MAKETEXT{"Leave blank to include all topics in the topic list"}%" />
+            %TMPL:P{"exclusions"}%
           </td>
           <td class="infoCol">
             %MAKETEXT{"Comma-separated list of [_1] that match the names of topics to exclude. This acts as a filter on the topic list. Leave blank to include all topics in the topic list." args="[[#WildcardPattern][%MAKETEXT{"wildcard patterns"}%]]"}%
@@ -199,7 +199,7 @@
         <tr class="expert">
           <td class="nameCol">%MAKETEXT{"Publish skin"}%</td>
           <td class="inputCol">
-            <input type="text" name="publishskin" class="foswikiInputField" size="20" value="%SKIN%" title="%MAKETEXT{"Use basic_publish unless you have your own customised publishing skin"}%"/>
+            %TMPL:P{"publishskin"}%
           </td>
           <td class="infoCol">
             %MAKETEXT{"The skin provides the template for how topics are published. See [_1] for more informations on skins." args="[[%SYSTEMWEB%.Skins][%MAKETEXT{"Skins"}%]]"}%
@@ -210,7 +210,7 @@
         <tr class="expert">
           <td class="nameCol">Preferences </td>
           <td class="inputCol">
-            <textarea name="preferences" class="foswikiInputField" rows="5" cols="80">JQREQUIRE=</textarea>
+            %TMPL:P{"preferences"}%
           </td>
           <td class="infoCol">
           %MAKETEXT{"Lets you define Foswiki [_1] that will be available for use in topics during this publishing run. Define preferences one per line, using the syntax =PREFERENCE=VALUE= - for example," args="[[PreferenceSettings][%MAKETEXT{"preferences"}%]]"}% <verbatim>
@@ -236,7 +236,7 @@ ISBN=1-56592-149-6
         <tr class="expert">
           <td class="nameCol">Templates </td>
           <td class="inputCol">
-            <input type="text" name="templates" class="foswikiInputField" size="20" value="viewprint" title="%MAKETEXT{"Use view unless you need a special template"}%"/>
+            %TMPL:P{"templates"}%
           </td>
           <td class="infoCol">
           %MAKETEXT{"Comma-separated list of template names."}%
@@ -305,7 +305,7 @@ ISBN=1-56592-149-6
        %MAKETEXT{"When exporting to PDF or TGZ the result will be attached to a topic."}%
     </td>
   </tr>
-  <tr class="expert" class="publishOptionsSet">
+  <tr class="expert publishOptionsSet">
     <td class="nameCol">%MAKETEXT{"Output attachment"}%</td>
     <td class="inputCol">
       %TMPL:P{"outattachment"}%
@@ -314,7 +314,7 @@ ISBN=1-56592-149-6
       %TMPL:P{"outattachment_info"}%
     </td>
   </tr>
-  <tr class="expert" class="publishOptionsSet">
+  <tr class="expert publishOptionsSet">
     <td class="nameCol">%MAKETEXT{"Output topic"}%</td>
     <td class="inputCol">
       %TMPL:P{"outwebtopic"}%
@@ -336,7 +336,7 @@ ISBN=1-56592-149-6
     <td colspan="3">
       %TWISTY{mode="div" showlink="%MAKETEXT{"Show file output options..."}%"}%
       <table class="foswikiTable publishForm">
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">Output file </td>
           <td class="inputCol">
             <input type="text" size="30" name="outfile" value="" class="foswikiInputField" title="%MAKETEXT{"Defaults to the name of the generator"}%" />
@@ -345,7 +345,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"Specify the root of the target output file name."}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">Google file </td>
           <td class="inputCol">
             <input type="text" size="30" name="googlefile" value="" class="foswikiInputField" title="%MAKETEXT{"Leave blank if you don't need one"}%" />
@@ -354,7 +354,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"Generates the \"HTML verification file\" needed to verify your site claim. See [_1]." args="<a href=\"http://www.google.com/webmasters/sitemaps/\">Google webmaster tools</a>"}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">%MAKETEXT{"Default page (topic)"}%</td>
           <td class="inputCol">
             <input type="text" size="30" name="defaultpage" value="WebHome" class="foswikiInputField" />
@@ -363,7 +363,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"Name of topic to used to generate default.htm, index.html"}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">
             %MAKETEXT{"Extended directory path"}%
           </td>
@@ -376,7 +376,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"See [_1] for a complete description of where the output is generated." args="[[%SYSTEMWEB%.PublishPlugin#WhereToFindTheOutput][%MAKETEXT{"where to find the output"}%]]"}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">
             %MAKETEXT{"Resource Directory"}%
           </td>
@@ -387,7 +387,7 @@ ISBN=1-56592-149-6
             %MAKETEXT{"When publishing to HTML, attachments, icons, etc, are output to this directory. The directory name is relative to the root of your published site."}%
           </td>
         </tr>
-        <tr class="expert" class="publishOptionsSet fileOptions ftpOptions">
+        <tr class="expert publishOptionsSet fileOptions ftpOptions">
           <td class="nameCol">
             %MAKETEXT{"Relative URL"}%
           </td>
@@ -510,4 +510,20 @@ ISBN=1-56592-149-6
 </form>
 </div>
 %TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"templates"}%<input type="text" name="templates" class="foswikiInputField" size="20" value="viewprint" title="%MAKETEXT{"Use view unless you need a special template"}%"/>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"publishskin"}%<input type="text" name="publishskin" class="foswikiInputField" size="20" value="%SKIN%" title="%MAKETEXT{"Use basic_publish unless you have your own customised publishing skin"}%"/>%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"exclusions"}%<input type="text" name="exclusions" class="foswikiInputField" value="%URLPARAM{"exclusions" default="" encode="entity"}%" size="30" title="%MAKETEXT{"Leave blank to include all topics in the topic list"}%" />%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="TML">}%
+%TMPL:DEF{"preferences"}%<textarea name="preferences" class="foswikiInputField" rows="5" cols="80">JQREQUIRE=</textarea>%TMPL:END%
 %{</verbatim>}%

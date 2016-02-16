@@ -1,5 +1,5 @@
 jQuery(function($){
-    $('form[name="publish"]').submit(function(){
+    foswiki.searchtopic = function(){
         var $this = $(this);
         var topics = '';
         var pdfs = '';
@@ -16,7 +16,7 @@ jQuery(function($){
         });
         $this.find('input[name="topiclist"]').val(topics);
         $this.find('input[name="catpdf"]').val(pdfs);
-    });
+    };
     $('.selectAllTopics').livequery(function(){$(this).click(function(){
         $('form[name="publish"]').find('input[name="topiclistCB"]').prop('checked', true);
         return false;

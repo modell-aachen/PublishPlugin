@@ -8,6 +8,7 @@ use Foswiki::Func;
 use Error ':try';
 use Assert;
 use Foswiki::Plugins::PublishPlugin::PageAssembler;
+use URI::Escape;
 
 sub CHECKLEAK { 0 }
 
@@ -218,11 +219,14 @@ sub new {
       || 'basic_publish';
 
     $this->{historyText} = '';
+
+    $this->{AccessDeniedCache} = {}; # cache acls; Access denied -> 1
     return $this;
 }
 
 sub finish {
     my $this = shift;
+    $this->{AccessDeniedCache} = undef;
     $this->{session} = undef;
 }
 
@@ -293,6 +297,7 @@ sub publish {
     my ( $this, @webs ) = @_;
 
     $this->{publisher} = Foswiki::Func::getWikiName();
+    $this->{publisherUID} = Foswiki::Func::getCanonicalUserID();
 
     #don't add extra markup for topics we're not linking too
     # NEWTOPICLINKSYMBOL LINKTOOLTIPINFO
@@ -509,6 +514,9 @@ sub _publishWeb {
         File::Path::mkpath($dir);
 
         $this->{archive} = $this->{generator}->new( $this, $dir, $this );
+        $this->{archive}->addIndex(Foswiki::Func::expandCommonVariables(<<HTML, $web)) if $this->{archive}->can('addIndex');
+<html><head><title>Published</title></head><body>%INDEXDESCRIPTION{default="<a href='./$web/$Foswiki::cfg{HomeTopicName}.html'>$Foswiki::cfg{HomeTopicName}</a>"}%</body></html>
+HTML
 
         $this->publishUsingTemplate($template);
 
@@ -721,14 +729,15 @@ sub publishTopic {
     }
 
     unless (
-        Foswiki::Func::checkAccessPermission(
-            "VIEW", $this->{publisher}, $text, $t, $w
-        )
+        $meta->haveAccess( 'VIEW', $this->{publisherUID} )
       )
     {
         $this->logError("View access to $topic denied");
+        $this->{AccessDeniedCache}->{$w}{$t} = 1;
         return;
     }
+
+    $this->{AccessDeniedCache}->{$w}{$t} = 0;
 
     if ( $this->{topicsearch} && $text =~ /$this->{topicsearch}/ ) {
         $this->logInfo( $topic, "excluded by filter" );
@@ -993,6 +1002,18 @@ sub _filetypeForTemplate {
     return '.html';
 }
 
+sub cacheACLs {
+    my ($this, $web, $topic) = @_;
+
+    my $acl = $this->{AccessDeniedCache}->{$web}{$topic};
+    if(not defined $acl) {
+        my $wikiname = Foswiki::Func::getWikiName();
+        $acl = ( ( $web !~ m/^System/ and ( not Foswiki::Func::topicExists( $web, $topic ) or not Foswiki::Func::checkAccessPermission( 'VIEW', $wikiname,  undef, $topic, $web ) ) ) ? 1 : 0 );
+        $this->{AccessDeniedCache}->{$web}{$topic} = $acl;
+    };
+    return $acl;
+}
+
 #  Copy a resource (image, style sheet, etc.) from pub/%WEB% to
 #   static HTML's rsrc directory.
 #   * =$this->{web}= - name of web
@@ -1001,6 +1022,8 @@ sub _filetypeForTemplate {
 sub _copyResource {
     my ( $this, $srcName, $copied ) = @_;
     my $rsrcName = $srcName;
+
+    $rsrcName = uri_unescape($rsrcName);
 
     # Trim the resource name, as they can sometimes pick up whitespaces
     $rsrcName =~ /^\s*(.*?)\s*$/;
@@ -1017,12 +1040,21 @@ sub _copyResource {
         $this->logError("--- FIXED UP to $rsrcName");
     }
 
+    # strip off things like ?version=wossname arguments appended to .js
+    my $bareRsrcName = $rsrcName;
+    $bareRsrcName =~ s/\?.*//o;
+
+    # poor man's relative path resolver: strip "//" and "/./", resolve "/../"
+    $bareRsrcName =~ s#/\./#/#g;
+    $bareRsrcName =~ s#//#/#g;
+    while($bareRsrcName =~ s#/[^/]+/../#/#) {
+        next; # continue resolving /../
+    }
+
+    return '' if $rsrcName eq '';
+
     # See if we've already copied this resource.
     unless ( exists $copied->{$rsrcName} ) {
-
-        # strip off things like ?version=wossname arguments appended to .js
-        my $bareRsrcName = $rsrcName;
-        $bareRsrcName =~ s/\?.*//o;
 
         # Nope, it's new. Gotta copy it to new location.
         # Split resource name into path (relative to pub/%WEB%) and leaf name.
@@ -1037,8 +1069,7 @@ sub _copyResource {
         # Block access if file is not in system and user has no view access to topic.
         # If topic does not exist, block as well; this filters things like 'Main/../Main/MySecret/Secret.png'.
         my ( $fweb, $ftopic ) = Foswiki::Func::normalizeWebTopicName( undef, $path );
-        my $wikiname = Foswiki::Func::getWikiName();
-        if ( $fweb !~ m/^System/ and ( not Foswiki::Func::topicExists( $fweb, $ftopic ) or not Foswiki::Func::checkAccessPermission( 'VIEW', $wikiname,  undef, $ftopic, $fweb ) ) ) {
+        if ($this->cacheACLs($fweb, $ftopic)) {
             $file = 'err.png';
             $path = $Foswiki::cfg{SystemWebName}.'/MAPrinceModPlugin';
             $bareRsrcName = "$path/$file";
@@ -1053,10 +1084,10 @@ sub _copyResource {
             my $dest = "$this->{rsrcdir}/$path/$file";
             $dest =~ s!//!/!g;
             if ( -d $src ) {
-                $this->{archive}->addDirectory( $src, $dest );
+                $dest = $this->{archive}->addDirectory( $src, $dest );
             }
             else {
-                $this->{archive}->addFile( $src, $dest );
+                $dest = $this->{archive}->addFile( $src, $dest );
             }
 
             # Record copy so we don't duplicate it later.
@@ -1077,7 +1108,7 @@ sub _copyResource {
                 close($fh);
                 $data =~ s#\/\*.*?\*\/##gs;    # kill comments
                 foreach my $line ( split( /\r?\n/, $data ) ) {
-                    if ( $line =~ /url\(["']?(.*?)["']?\)/ ) {
+                    while ( $line =~ /url\(["']?(.*?)["']?\)/g ) {
                         push @moreResources, $1;
                     }
                 }
@@ -1133,7 +1164,11 @@ sub _topicURL {
     }
 
     # Is this a path to a known topic? If not, reform the original URL
-    return "$root/$path$params$anchor" unless $this->{topics}->{$path};
+    unless ( $this->{topics}->{$path} ) {
+        my $host = Foswiki::Func::getUrlHost();
+        return "$root/$path$params$anchor" unless ($root =~ m#^(?:$host|/)# && $this->{archive}->can('notIncludedLink'));
+        return $this->{archive}->notIncludedLink($this->{web}, $path, $params, $anchor);
+    }
 
     # For here on we know we're dealing with a topic link, so we
     # ignore params in the rewritten URL - they won't be any use
@@ -1222,7 +1257,11 @@ sub _rsrcpath {
     # if path is already relative or URLish, return it
     return $rsrcloc if $rsrcloc =~ m{^(\.+/|[a-z]+:)};
 
-    $odir = "/$odir" unless $odir =~ /^\//;
+    # make sure path is relative for both
+    $rsrcloc = ".$rsrcloc" if $rsrcloc =~ /^\//;
+    $rsrcloc = "./$rsrcloc" unless $rsrcloc =~ /^\.\//;
+    $odir = ".$odir" if $odir =~ /^\//;
+    $odir = "./$odir" unless $odir =~ /^\.\//;
 
     # See if the generator wants to deal with this resource
     my $nloc;

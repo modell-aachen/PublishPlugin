@@ -2,26 +2,25 @@ jQuery(function($) {
     var $pform = $("form[name='publish']");
     if(!$pform.length) return;
 
-    $pform.find("select[name='web']").change(function(){
-        var $this = $(this);
-        var web = $(this).val();
+    $pform.find("select[name='web'],.reloadTopicList").change(function(){
+        var params = '?web=' + $("[name='web']").val();
+        $('.reloadTopicList').each(function() {
+            var $this = $(this);
+            var val = $this.val();
+            var name = $this.attr('name');
+            params += ';'+name + '=' + encodeURIComponent(val);
+        });
         if($.blockUI !== undefined) $.blockUI();
-        window.location.replace(foswiki.getPreference('SCRIPTURL') + '/view' + foswiki.getPreference('SCRIPTSUFFIX') + '/' + foswiki.getPreference('WEB') + '/' + foswiki.getPreference('TOPIC') + '?web=' + encodeURIComponent(web));
+        window.location.replace(foswiki.getPreference('SCRIPTURL') + '/view' + foswiki.getPreference('SCRIPTSUFFIX') + '/' + foswiki.getPreference('WEB') + '/' + foswiki.getPreference('TOPIC') + params);
     });
 
     if($pform.ajaxForm) $pform.ajaxForm({
-        beforeSubmit: function(arr, $form, options) {
+        beforeSerialize: function($form, options) {
             if(StrikeOne !== undefined) {
                 StrikeOne.submit($form[0]);
-                for(var i = 0; i < arr.length; i++) {
-                    var obj = arr[i];
-                    if(obj.name = 'validation_key') {
-                        obj.value = $form.find('input[name=validation_key]:first').attr('value');
-                        break;
-                    }
-                }
             }
             if($.blockUI !== undefined) $.blockUI();
+            if(foswiki.searchtopic) foswiki.searchtopic.call($form);
         },
         success: function(data) {
             if($.blockUI !== undefined) $.unblockUI();

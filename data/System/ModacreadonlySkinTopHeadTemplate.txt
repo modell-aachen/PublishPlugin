@@ -1,0 +1,9 @@
+%TMPL:INCLUDE{"TopHead"}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"top_head_kvp"}%%IF{"$'GETWORKFLOWROW{approved}'!='1'" then="$percentTMPL:P{top_head_discussion}$percent" else="$percentTMPL:P{top_head_approved}$percent"}%%TMPL:END%
+%{</verbatim>}%
+
+%{<verbatim class="tml">}%
+%TMPL:DEF{"top_head"}%%IF{"$'GETWORKFLOWROW{uncontrolled}'!=1" then="$percentTMPL:P{top_head_kvp}$percent" else="$percentTMPL:P{top_head_standard}$percent"}%%TMPL:END%
+%{</verbatim>}%

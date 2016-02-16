@@ -1,0 +1,10 @@
+%TMPL:INCLUDE{"viewsidebar"}%
+
+%TMPL:DEF{"websidebar"}%
+<div id="modacLogoWrapper">
+  <div id="modacLogo"><a href="%WEBLOGOURL%"><img src="%WEBLOGOIMG%" border="0" alt="%WEBLOGOALT%" style="border:none;" /></a></div>
+</div>
+<div id="modacSidebarContents">
+  %IF{"istopic 'WebLeftBarModacReadonly'" then="$percntINCLUDE{$quot%WEB%.WebLeftBarModacReadonly$quot}$percnt" else="%IF{"istopic '%CUSTOMIZINGWEB{default="Custom"}%.WebLeftBarDefaultModacReadonly'" then="$dollarpercntINCLUDE{$dollarquot%CUSTOMIZINGWEB{default="Custom"}%.WebLeftBarDefaultModacReadonly$dollarquot}$dollarpercnt" else="$dollarpercntINCLUDE{$dollarquot%SYSTEMWEB%.WebLeftBarDefaultModacReadonly$dollarquot}$dollarpercnt"}%"}%
+</div>
+%TMPL:END%
