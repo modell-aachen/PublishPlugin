@@ -112,15 +112,24 @@ sub close {
             $file =~ s#\\,#,#g;
             my ($wt, $fname) = $file =~ m#(.*)/(.*)#;
             my ($fweb, $ftopic) = Foswiki::Func::normalizeWebTopicName(undef, $wt);
+            unless ( -e "$Foswiki::cfg{PubDir}/$fweb/$ftopic/$fname" ) {
+		Foswiki::Func::writeWarning("Could not read pdf for concatination: $file");
+                $this->{logger}->logError( "Could not read pdf for concatination: $file" );
+		next;
+	    }
             unshift(@catfiles, "$Foswiki::cfg{PubDir}/$fweb/$ftopic/$fname");
         }
         unshift(@catfiles, "$this->{path}tmp.pdf");
-        Foswiki::Sandbox::sysCommand(
+        my ($data, $exit, $stderr ) = Foswiki::Sandbox::sysCommand(
             $Foswiki::sharedSandbox,
             "pdfunite %FILES|F% %FILE|F%",
             FILES => \@catfiles,
             FILE => "$this->{path}$landed"
         );
+	if($exit) {
+	    Foswiki::Func::writeWarning("data: $data exit: $exit err: $stderr");
+            $this->{logger}->logError( $stderr ) if $stderr;
+	}
     }
 
     # attach result
