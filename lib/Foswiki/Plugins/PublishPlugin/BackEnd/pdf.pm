@@ -108,7 +108,8 @@ sub close {
             TMP => "$this->{path}tmp.pdf"
         );
         my @catfiles;
-        foreach my $file (split('\s*,\s*',$this->{params}->{catpdf})) {
+        foreach my $file (split(/\s*(?<!\\),\s*/,$this->{params}->{catpdf})) {
+            $file =~ s#\\,#,#g;
             my ($wt, $fname) = $file =~ m#(.*)/(.*)#;
             my ($fweb, $ftopic) = Foswiki::Func::normalizeWebTopicName(undef, $wt);
             unshift(@catfiles, "$Foswiki::cfg{PubDir}/$fweb/$ftopic/$fname");

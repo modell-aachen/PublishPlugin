@@ -8,7 +8,7 @@ jQuery(function($){
             var val = $(this).val();
             if(regex.exec(val)) {
                 if(pdfs) pdfs += ',';
-                pdfs += val;
+                pdfs += val.replace(/,/g, '\\,');
             } else {
                 if(topics) topics += ',';
                 topics += val;
