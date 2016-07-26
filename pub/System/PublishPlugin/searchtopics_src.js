@@ -1,6 +1,9 @@
 jQuery(function($){
     foswiki.searchtopic = function(){
         var $this = $(this);
+
+        if(!$this.find('input[name="topiclistCB"]').length) return;
+
         var topics = '';
         var pdfs = '';
         var regex = new RegExp("\.pdf$");
